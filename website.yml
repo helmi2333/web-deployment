@@ -1,0 +1,9 @@
+---
+
+- name: Install the site
+  hosts: droplets
+
+  roles:
+    - vim
+    - nginx
+    - twentymilliseconds

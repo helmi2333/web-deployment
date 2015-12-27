@@ -1,0 +1,10 @@
+---
+nginx_version: '1.8.0'
+nginx_dir: '/home/nginx'
+nginx_include_dir: '{{nginx_dir}}/etc/includes'
+nginx_sbin_dir: '{{ nginx_dir }}/sbin'
+nginx_binary: '{{ nginx_sbin_dir }}/nginx'
+nginx_conf: '{{ nginx_dir }}/conf/nginx.conf'
+nginx_log_dir: '/var/log/nginx'
+nginx_error_log: '/var/log/nginx/error.log'
+nginx_initd: '/etc/init.d/nginx'

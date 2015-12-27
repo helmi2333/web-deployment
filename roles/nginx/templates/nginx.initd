@@ -1,0 +1,83 @@
+#!/bin/sh
+
+DAEMON={{ nginx_binary }}
+CONF={{ nginx_conf }}
+NAME=nginx
+DESC=nginx
+
+start_nginx() {
+	# Start the daemon/service
+	#
+	# Returns:
+	#   0 if daemon has been started
+	#   1 if daemon was already running
+	#   2 if daemon could not be started
+  "$DAEMON" -c "$CONF"
+}
+
+test_config() {
+	# Test the nginx configuration
+	$DAEMON -t -c "$CONF" >/dev/null 2>&1
+}
+
+stop_nginx() {
+	# Stops the daemon/service
+	#
+	# Return
+	#   0 if daemon has been stopped
+	#   1 if daemon was already stopped
+	#   2 if daemon could not be stopped
+	#   other if a failure occurred
+  "$DAEMON" -s stop
+	RETVAL="$?"
+	sleep 1
+	return "$RETVAL"
+}
+
+reload_nginx() {
+	# Function that sends a SIGHUP to the daemon/service
+  "$DAEMON" -s reload -c "$CONF"
+	return 0
+}
+
+case "$1" in
+	start)
+		echo "Starting $DESC" "$NAME"
+		start_nginx
+		;;
+	stop)
+		echo "Stopping $DESC" "$NAME"
+		stop_nginx
+		;;
+	restart)
+		# Check configuration before stopping nginx
+		if ! test_config; then
+			exit $?
+		fi
+
+    reload_nginx || start_nginx
+		;;
+	reload|force-reload)
+		echo "Reloading $DESC configuration" "$NAME"
+
+		# Check configuration before stopping nginx
+		#
+		# This is not entirely correct since the on-disk nginx binary
+		# may differ from the in-memory one, but that's not common.
+		# We prefer to check the configuration and return an error
+		# to the administrator.
+		if ! test_config; then
+			exit $?
+		fi
+
+		reload_nginx
+		;;
+	configtest|testconfig)
+		echo "Testing $DESC configuration"
+		test_config
+		;;
+	*)
+		echo "Usage: $NAME {start|stop|restart|reload|force-reload|configtest}" >&2
+		exit 3
+		;;
+esac

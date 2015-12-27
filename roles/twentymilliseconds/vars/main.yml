@@ -1,0 +1,19 @@
+twentyms_user: 'twentyms'
+twentyms_dir: '/home/{{twentyms_user}}'
+vrusability_directory: '{{ twentyms_dir }}/vrusability'
+hyde_theme_directory: '{{vrusability_directory}}/themes/hyde'
+vrusability_private_key: 'ssh-keys/{{ twentyms_user }}/vrusability_rsa'
+vrusability_remote_private_key: '{{ twentyms_dir }}/.ssh/vrusability_rsa'
+hyde_private_key: 'ssh-keys/{{ twentyms_user }}/hyde_rsa'
+hyde_remote_private_key: '{{ twentyms_dir }}/.ssh/hyde_rsa'
+
+redirect_domains:
+  - vrusability.com
+  - www.vrusability.com
+  - twentymilliseconds.com
+  - 20milliseconds.net
+  - twentymilliseconds.net
+  - www.20milliseconds.net
+  - www.twentymilliseconds.net
+  - 20ms.net
+  - www.20ms.net

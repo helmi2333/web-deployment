@@ -1,0 +1,32 @@
+---
+- name: get nginx version
+  command: "{{ nginx_binary }} -v"
+  register: result
+  ignore_errors: True
+
+- name: download and compile nginx
+  include: install.yml
+  when: result.rc != 0 or result.stderr != "nginx version{{':'}} nginx/{{nginx_version}}"
+
+- file: path={{ nginx_include_dir }} state=directory mode=0755
+  become: yes
+  become_user: nginx
+
+- template: src=nginx.initd
+            dest=/etc/init.d/nginx
+            owner=nginx
+            group=nginx
+            mode=0755
+
+- template: src=nginx.conf
+            dest={{ nginx_conf }}
+            owner=nginx
+            group=nginx
+
+- name: ensure nginx starts when the server restarts
+  file: state=link
+        src={{ nginx_initd }}
+        dest=/etc/rc3.d/S03nginx
+
+- file: path={{ nginx_log_dir }} group=nginx owner=nginx state=directory mode=0755
+  notify: reload nginx

@@ -1,0 +1,3 @@
+---
+bitbucket_home: '/home/bitbucket'
+bitbucket_private_key: '{{bitbucket_home}}/.ssh/bitbucket_rsa'

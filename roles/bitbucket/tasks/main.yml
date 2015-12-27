@@ -1,0 +1,11 @@
+---
+- user: name=bitbucket
+
+- file: path={{bitbucket_home}}/.ssh state=directory mode=0755
+  become: yes
+  become_user: bitbucket
+
+- name: copy bitbucket key to remote server
+  copy: src=ssh-keys/bitbucket_rsa dest={{bitbucket_private_key}} mode=0400
+  become: yes
+  become_user: bitbucket

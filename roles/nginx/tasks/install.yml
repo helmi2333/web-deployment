@@ -1,0 +1,21 @@
+---
+- group: name=nginx
+
+- user: name=nginx group=nginx append=yes
+
+- apt: name=build-essential,gcc-4.8,git,curl,libpcre3-dev,libssl1.0.0,libssl-dev state=present
+
+- name: Create bin
+  file: path=/home/nginx/bin state=directory mode=0755
+  become: yes
+  become_user: nginx
+
+- name: Copy the installer
+  copy: src=installers/nginx.sh dest=/home/nginx/bin/install mode=0755
+  become: yes
+  become_user: nginx
+
+- name: Run the installer
+  command: /home/nginx/bin/install
+  become: yes
+  become_user: nginx

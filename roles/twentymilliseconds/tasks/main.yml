@@ -1,0 +1,55 @@
+---
+- group: name=twentyms state=present
+
+- user: name=twentyms group=twentyms append=yes
+
+- file: path={{ twentyms_dir }}/.ssh
+        state=directory 
+        mode=0755
+        group=twentyms
+  become: yes
+  become_user: twentyms
+
+- file: path={{ vrusability_directory }}
+        state=directory 
+        mode=0755
+        group=twentyms
+  become: yes
+  become_user: twentyms
+
+- name: copy vrusability deployment key to remote server
+  copy: src={{ vrusability_private_key }} dest={{ vrusability_remote_private_key }} mode=0400
+  become: yes
+  become_user: twentyms
+
+- git: repo=git@bitbucket.org:kevinburke/vrusability.git
+       dest={{ vrusability_directory }}
+       key_file={{ vrusability_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: twentyms
+
+- name: copy hyde deployment key to remote server
+  copy: src={{ hyde_private_key }} dest={{ hyde_remote_private_key }} mode=0400
+  become: yes
+  become_user: twentyms
+
+- file: path={{ hyde_theme_directory }} 
+        state=directory 
+        mode=0755 
+        group=twentyms
+  become: yes
+  become_user: twentyms
+
+- git: repo=git@bitbucket.org:kevinburke/hyde.git
+       dest={{ hyde_theme_directory }}
+       accept_hostkey=yes
+       key_file={{ hyde_remote_private_key }}
+  become: yes
+  become_user: twentyms
+
+- template: src=vrusability.nginx.conf
+            dest={{nginx_include_dir}}/vrusability.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
