@@ -6,6 +6,7 @@ vrusability_private_key: 'ssh-keys/{{ twentyms_user }}/vrusability_rsa'
 vrusability_remote_private_key: '{{ twentyms_dir }}/.ssh/vrusability_rsa'
 hyde_private_key: 'ssh-keys/{{ twentyms_user }}/hyde_rsa'
 hyde_remote_private_key: '{{ twentyms_dir }}/.ssh/hyde_rsa'
+diffiehellman: '/home/nginx/dhparam.pem'
 
 redirect_domains:
   - vrusability.com

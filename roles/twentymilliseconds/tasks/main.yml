@@ -48,8 +48,15 @@
   become: yes
   become_user: twentyms
 
+- name: generate Diffie Hellman parameters
+  command: "openssl dhparam -out {{ diffiehellman }} 2048"
+  args:
+    creates: "{{ diffiehellman }}"
+  become: yes
+  become_user: nginx
+
 - template: src=vrusability.nginx.conf
-            dest={{nginx_include_dir}}/vrusability.conf
+            dest={{ nginx_include_dir }}/vrusability.conf
             owner=nginx
             group=nginx
   notify: reload nginx

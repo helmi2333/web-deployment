@@ -4,6 +4,7 @@
   hosts: droplets
 
   roles:
+    - letsencrypt
     - vim
     - nginx
     - twentymilliseconds

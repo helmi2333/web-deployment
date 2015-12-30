@@ -1,0 +1,8 @@
+---
+- apt: name=git state=present
+
+- git: repo=https://github.com/letsencrypt/letsencrypt.git
+       dest=/opt/letsencrypt
+
+- name: copy letsencrypt certs to remote server
+  copy: src=certs/live dest=/etc/letsencrypt
