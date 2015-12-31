@@ -1,0 +1,4 @@
+---
+doony_dir: '/home/doony'
+doony_private_key: 'ssh-keys/doony/doony_rsa'
+doony_remote_private_key: '{{ doony_dir }}/.ssh/doony_rsa'

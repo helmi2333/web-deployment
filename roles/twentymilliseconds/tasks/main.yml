@@ -10,12 +10,12 @@
   become: yes
   become_user: twentyms
 
-- file: path={{ vrusability_directory }}
-        state=directory 
-        mode=0755
-        group=twentyms
-  become: yes
-  become_user: twentyms
+#- file: path={{ vrusability_directory }}
+        #state=directory 
+        #mode=0755
+        #group=twentyms
+  #become: yes
+  #become_user: twentyms
 
 - name: copy vrusability deployment key to remote server
   copy: src={{ vrusability_private_key }} dest={{ vrusability_remote_private_key }} mode=0400

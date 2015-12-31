@@ -1,0 +1,30 @@
+---
+- group: name=doony state=present
+
+- user: name=doony group=doony append=yes
+
+- file: path={{ doony_dir }}/.ssh
+        state=directory 
+        mode=0755
+        group=doony
+  become: yes
+  become_user: doony
+
+- name: copy doony deployment key to remote server
+  copy: src={{ doony_private_key }} dest={{ doony_remote_private_key }} mode=0400
+  become: yes
+  become_user: doony
+
+- git: repo=git@github.com:kevinburke/doony.git
+       dest={{ doony_dir }}/doony
+       key_file={{ doony_remote_private_key }}
+       accept_hostkey=yes
+       version=gh-pages
+  become: yes
+  become_user: doony
+
+- template: src=doony.nginx.conf
+            dest={{ nginx_include_dir }}/doony.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
