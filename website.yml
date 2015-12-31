@@ -4,6 +4,7 @@
   hosts: droplets
 
   roles:
+    - timezone
     - letsencrypt
     - vim
     - nginx
