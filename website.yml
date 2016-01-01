@@ -8,5 +8,6 @@
     - letsencrypt
     - vim
     - nginx
+    - jenkins
     - twentymilliseconds
     - doony

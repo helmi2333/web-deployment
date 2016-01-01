@@ -1,0 +1,16 @@
+---
+# Instructions taken from https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
+
+- shell: "curl --location https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -"
+
+- shell: sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+- command: apt-get update
+
+- template: src=jenkins.default
+            dest=/etc/default/jenkins
+            owner=jenkins
+            group=jenkins
+  notify: reload jenkins
+
+- apt: name=jenkins state=present
