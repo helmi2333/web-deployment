@@ -48,13 +48,6 @@
   become: yes
   become_user: twentyms
 
-- name: generate Diffie Hellman parameters
-  command: "openssl dhparam -out {{ diffiehellman }} 2048"
-  args:
-    creates: "{{ diffiehellman }}"
-  become: yes
-  become_user: nginx
-
 - template: src=vrusability.nginx.conf
             dest={{ nginx_include_dir }}/vrusability.conf
             owner=nginx
@@ -68,3 +61,5 @@
 # - cron: ./letsencrypt-auto  certonly --webroot -w /home/twentyms/vrusability/public -d www.20milliseconds.net --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: ./letsencrypt-auto  certonly --webroot -w /home/twentyms/vrusability/public -d twentymilliseconds.net --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: ./letsencrypt-auto  certonly --webroot -w /home/twentyms/vrusability/public -d www.twentymilliseconds.net --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: ./letsencrypt-auto  certonly --webroot -w /home/twentyms/vrusability/public -d 20ms.net --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: ./letsencrypt-auto  certonly --webroot -w /home/twentyms/vrusability/public -d www.20ms.net --renew-by-default --email kev@inburke.com --text --agree-tos

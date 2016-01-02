@@ -1,0 +1,32 @@
+---
+- group: name=athenian state=present
+
+- user: name=athenian group=athenian append=yes
+
+- file: path=/home/athenian/.ssh
+        state=directory 
+        mode=0755
+        group=athenian
+  become: yes
+  become_user: athenian
+
+- name: copy athenian deployment key to remote server
+  copy: src={{ athenian_private_key }} dest={{ athenian_remote_private_key }} mode=0400
+  become: yes
+  become_user: athenian
+
+- git: repo=git@github.com:kevinburke/athenian.me.git
+       dest=/home/athenian/public
+       accept_hostkey=yes
+       key_file={{ athenian_remote_private_key }}
+  become: yes
+  become_user: athenian
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/athenian.me.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: ./letsencrypt-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: ./letsencrypt-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
