@@ -1,2 +1,6 @@
 ---
 jenkins_port: '9090'
+jenkins_private_key: ssh-keys/jenkins/github_rsa
+jenkins_dir: /var/lib/jenkins
+jenkins_ssh_dir: '{{ jenkins_dir }}/.ssh'
+jenkins_remote_private_key: '{{ jenkins_ssh_dir }}/github_rsa'

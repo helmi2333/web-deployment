@@ -4,8 +4,25 @@
 - shell: "curl --location https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -"
 
 - shell: sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+  args:
+    creates: /etc/apt/sources.list.d/jenkins.list
 
 - command: apt-get update
+
+- name: create ssh directory
+  file: path={{ jenkins_ssh_dir }} state=directory mode=0755
+  become: yes
+  become_user: jenkins
+
+- name: copy jenkins deployment key to remote server
+  copy: src={{ jenkins_private_key }} dest={{ jenkins_remote_private_key }} mode=0400
+  become: yes
+  become_user: jenkins
+
+- template: src=ssh.config 
+            dest={{ jenkins_ssh_dir }}/config
+            owner=jenkins
+            group=jenkins
 
 - template: src=jenkins.default
             dest=/etc/default/jenkins
