@@ -1,2 +1,2 @@
 [droplets]
-wildebeest ansible_ssh_host=wildebeest
+wildebeest ansible_ssh_host=wildebeest-root

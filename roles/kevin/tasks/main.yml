@@ -1,0 +1,55 @@
+---
+- group: name=kevin state=present
+
+- user: name=kevin
+        groups=kevin,sudo
+        shell=/usr/bin/zsh
+        append=yes
+        password={{ password }}
+
+- file: path=/home/kevin/.ssh
+        state=directory
+        mode=0755
+        group=kevin
+  become: yes
+  become_user: kevin
+
+- name: copy dotfiles deployment key to remote server
+  copy: src={{ dotfiles_private_key }} dest={{ dotfiles_remote_private_key }} mode=0400
+  become: yes
+  become_user: kevin
+
+- name: install oh my zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git
+       dest=/home/kevin/.oh-my-zsh
+       accept_hostkey=yes
+
+- git: repo=git@bitbucket.org:kevinburke/small-dotfiles.git
+       dest=/home/kevin/small-dotfiles
+       accept_hostkey=yes
+       key_file={{ dotfiles_remote_private_key }}
+  become: yes
+  become_user: kevin
+
+- shell: cp -na . ..
+  args:
+    chdir: /home/kevin/small-dotfiles
+    creates: /home/kevin/owner.txt
+
+- file: path=/home/kevin/tmp
+        state=directory
+        mode=0755
+        group=kevin
+  become: yes
+  become_user: kevin
+
+- get_url: url=https://bin.equinox.io/c/3XSDcZY5VdZ/weirdfortune-stable-linux-amd64.tgz
+           dest=/home/kevin/tmp/weirdfortune.tgz
+
+- unarchive: src=/home/kevin/tmp/weirdfortune.tgz
+             copy=no
+             dest=/usr/bin
+
+- authorized_key: user=kevin key="{{ lookup('file', 'ssh-keys/kevin/login_rsa.pub') }}"
+  become: yes
+  become_user: kevin

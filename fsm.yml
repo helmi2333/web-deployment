@@ -1,0 +1,6 @@
+---
+- name: Install friendsofsevamandir.com
+  hosts: droplets
+
+  roles:
+    - fsm

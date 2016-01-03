@@ -7,6 +7,7 @@
     - timezone
     - letsencrypt
     - vim
+    - kevin
     - nginx
     - jenkins
     - twentymilliseconds

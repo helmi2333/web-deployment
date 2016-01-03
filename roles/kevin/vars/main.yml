@@ -1,0 +1,7 @@
+---
+# Password is in 1Password. Generated with:
+# openssl passwd -1 -salt q6cK2kyx 'thepassword'
+# http://unix.stackexchange.com/q/81240/9519
+password: '$1$q6cK2kyx$3MYlqFk5e1zE3PSGnhFgy0'
+dotfiles_private_key: ssh-keys/kevin/dotfiles_rsa
+dotfiles_remote_private_key: /home/kevin/.ssh/dotfiles_rsa
