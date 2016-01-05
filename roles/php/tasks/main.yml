@@ -1,0 +1,2 @@
+---
+apt: name=libcurl4-openssl-dev,libxml2,libmcrypt-dev,libedit-dev state=present

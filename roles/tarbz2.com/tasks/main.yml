@@ -1,0 +1,31 @@
+---
+- group: name=tarbz2 state=present
+
+- user: name=tarbz2 group=tarbz2 append=yes
+
+- file: path=/home/tarbz2/.ssh
+        state=directory
+        mode=0755
+        group=tarbz2
+  become: yes
+  become_user: tarbz2
+
+- name: copy tarbz2 deployment key to remote server
+  copy: src={{ tarbz2_private_key }} dest={{ tarbz2_remote_private_key }} mode=0400
+  become: yes
+  become_user: tarbz2
+
+- git: repo=git@github.com:kevinburke/tarbz2.com.git
+       dest=/home/tarbz2/public
+       accept_hostkey=yes
+       key_file={{ tarbz2_remote_private_key }}
+  become: yes
+  become_user: tarbz2
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/tarbz2.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/tarbz2/public -d tarbz2.com --renew-by-default --email kev@inburke.com --text --agree-tos

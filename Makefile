@@ -8,4 +8,4 @@ website:
 	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook website.yml
 
 copy-certs:
-	scp -r wildebeest:/etc/letsencrypt/live certs
+	scp -r wildebeest-root:/etc/letsencrypt/live certs

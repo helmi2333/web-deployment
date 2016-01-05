@@ -1,0 +1,6 @@
+---
+- name: Install Kevin's deps
+  hosts: droplets
+
+  roles:
+    - kevin

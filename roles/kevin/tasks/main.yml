@@ -31,10 +31,20 @@
   become: yes
   become_user: kevin
 
-- shell: cp -na . ..
+- command: cp -na . ..
   args:
     chdir: /home/kevin/small-dotfiles
     creates: /home/kevin/owner.txt
+
+- command: mkdir -p /home/kevin/.vim/autoload /home/kevin/.vim/tmp/undo /home/kevin/.vim/tmp/backup /home/kevin/.vim/tmp/swap
+  become: yes
+  become_user: kevin
+
+- command: cp /home/kevin/.vim/pathogen/autoload/pathogen.vim /home/kevin/.vim/autoload
+  become: yes
+  become_user: kevin
+  args:
+    creates: /home/kevin/.vim/autoload/pathogen.vim
 
 - file: path=/home/kevin/tmp
         state=directory
@@ -49,6 +59,11 @@
 - unarchive: src=/home/kevin/tmp/weirdfortune.tgz
              copy=no
              dest=/usr/bin
+
+- name: let kevin log in as the root user
+  template: src=sudoers.d
+            dest=/etc/sudoers.d/kevin
+            mode=0440
 
 - authorized_key: user=kevin key="{{ lookup('file', 'ssh-keys/kevin/login_rsa.pub') }}"
   become: yes

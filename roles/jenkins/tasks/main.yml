@@ -1,13 +1,14 @@
 ---
 # Instructions taken from https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
 
-- shell: "curl --location https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -"
+- name: get jenkins version
+  shell: java -jar /usr/share/jenkins/jenkins.war --version
+  register: result
+  ignore_errors: True
 
-- shell: sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
-  args:
-    creates: /etc/apt/sources.list.d/jenkins.list
-
-- command: apt-get update
+- name: install jenkins
+  include: install.yml
+  when: result.rc != 0 or result.stdout_lines[2] != "{{ jenkins_version }}"
 
 - name: create ssh directory
   file: path={{ jenkins_ssh_dir }} state=directory mode=0755
@@ -19,7 +20,7 @@
   become: yes
   become_user: jenkins
 
-- template: src=ssh.config 
+- template: src=ssh.config
             dest={{ jenkins_ssh_dir }}/config
             owner=jenkins
             group=jenkins
@@ -29,5 +30,3 @@
             owner=jenkins
             group=jenkins
   notify: reload jenkins
-
-- apt: name=jenkins state=present

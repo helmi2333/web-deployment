@@ -5,7 +5,7 @@
        dest=/opt/letsencrypt
 
 - name: copy letsencrypt certs to remote server
-  synchronize: src=certs/live 
+  synchronize: src=certs/live
                dest=/etc/letsencrypt
                mode=push
                set_remote_user=no

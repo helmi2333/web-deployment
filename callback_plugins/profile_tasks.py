@@ -40,7 +40,11 @@ class CallbackModule(object):
             self.stats[self.current] = time.time() - self.stats[self.current]
 
         # Sort the tasks by their running time
-        results = reverse(self.stats.items())
+        results = sorted(
+            self.stats.items(),
+            key=lambda value: value[1],
+            reverse=True,
+        )
 
         # Print the timings
         for name, elapsed in results:
