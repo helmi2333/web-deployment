@@ -1,2 +1,12 @@
 ---
-apt: name=libcurl4-openssl-dev,libxml2,libmcrypt-dev,libedit-dev state=present
+- group: name=php state=present
+
+- user: name=php group=php append=yes
+
+- name: get php version
+  command: "/home/php/bin/php -r 'echo phpversion();' "
+  register: result
+  ignore_errors: True
+
+- include: install.yml
+  when: result.rc != 0 or result.stdout != '{{ php_version }}'

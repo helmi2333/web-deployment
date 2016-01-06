@@ -1,2 +1,2 @@
 ---
-apt: name=libxml2-dev state=present
+- apt: name=libxml2-dev state=present

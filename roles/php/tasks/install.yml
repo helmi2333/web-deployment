@@ -1,0 +1,17 @@
+---
+- apt: name=libcurl4-openssl-dev,libxml2,libmcrypt-dev,libedit-dev state=present
+
+- name: Create bin
+  file: path=/home/php/bin state=directory mode=0755
+  become: yes
+  become_user: php
+
+- name: Copy the installer
+  copy: src=installers/php.sh dest=/home/php/bin/install mode=0755
+  become: yes
+  become_user: php
+
+- name: Run the installer
+  command: /home/php/bin/install
+  become: yes
+  become_user: php
