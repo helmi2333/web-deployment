@@ -11,17 +11,20 @@
 - file: path={{ nginx_include_dir }} state=directory mode=0755
   become: yes
   become_user: nginx
+  notify: reload nginx
 
 - template: src=nginx.initd
             dest=/etc/init.d/nginx
             owner=nginx
             group=nginx
             mode=0755
+  notify: reload nginx
 
 - template: src=nginx.conf
             dest={{ nginx_conf }}
             owner=nginx
             group=nginx
+  notify: reload nginx
 
 - name: generate Diffie Hellman parameters
   command: "openssl dhparam -out {{ diffiehellman }} 2048"
@@ -29,11 +32,13 @@
     creates: "{{ diffiehellman }}"
   become: yes
   become_user: nginx
+  notify: reload nginx
 
 - name: ensure nginx starts when the server restarts
   file: state=link
         src={{ nginx_initd }}
         dest=/etc/rc3.d/S03nginx
+  notify: reload nginx
 
 - file: path={{ nginx_log_dir }} group=nginx owner=nginx state=directory mode=0755
   notify: reload nginx

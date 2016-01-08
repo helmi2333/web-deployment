@@ -37,7 +37,7 @@ stop_nginx() {
 reload_nginx() {
   # Function that sends a SIGHUP to the daemon/service
   "$DAEMON" -s reload -c "$CONF"
-  return 0
+  return "$?"
 }
 
 case "$1" in
@@ -78,6 +78,9 @@ case "$1" in
     fi
 
     reload_nginx
+    if [ "$?" -ne 0 ]; then
+      exit "$?"
+    fi
     ;;
   configtest|testconfig)
     echo "Testing $DESC configuration"

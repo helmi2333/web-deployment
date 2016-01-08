@@ -4,8 +4,21 @@
 - git: repo=https://github.com/letsencrypt/letsencrypt.git
        dest=/opt/letsencrypt
 
+# keeping local permissions in sync got very difficult so we just store them
+# with kevin:staff and then chown root:root in the next task.
 - name: copy letsencrypt certs to remote server
-  synchronize: src=certs/live
-               dest=/etc/letsencrypt
+  synchronize: src=certs/
+               dest=/etc/letsencrypt/
                mode=push
+               links=yes
+               owner=yes
                set_remote_user=no
+  become: yes
+  become_user: root
+
+- name: set root:root on all files
+  file: path=/etc/letsencrypt
+        recurse=yes
+        owner=root
+        group=root
+        follow=yes

@@ -4,7 +4,7 @@
 - user: name=athenian group=athenian append=yes
 
 - file: path=/home/athenian/.ssh
-        state=directory 
+        state=directory
         mode=0755
         group=athenian
   become: yes
@@ -28,5 +28,8 @@
             group=nginx
   notify: reload nginx
 
-# - cron: ./letsencrypt-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
+#- name: install SSL certificate
+  #command: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
+
+# - cron:
 # - cron: ./letsencrypt-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos

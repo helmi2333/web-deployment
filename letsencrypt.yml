@@ -1,0 +1,6 @@
+---
+- name: Install letsencrypt
+  hosts: droplets
+
+  roles:
+    - letsencrypt
