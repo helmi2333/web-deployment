@@ -10,3 +10,33 @@
 
 - include: install.yml
   when: result.rc != 0 or result.stdout != '{{ php_version }}'
+
+- file: path=/home/php/etc/fpm.d
+        state=directory
+        mode=0755
+  become: yes
+  become_user: php
+
+- file: path=/home/php/log
+        state=directory
+        mode=0755
+  become: yes
+  become_user: php
+
+- file: path=/home/php/run
+        state=directory
+        mode=0755
+  become: yes
+  become_user: php
+
+- template: src=php-fpm.conf
+            dest=/home/php/etc/php-fpm.conf
+            owner=php
+            group=php
+            mode=0644
+  become: yes
+  become_user: php
+
+- template: src=php-fpm.initd
+            dest=/etc/init.d/php-fpm
+            mode=0755

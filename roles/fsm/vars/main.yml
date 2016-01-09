@@ -1,0 +1,10 @@
+---
+fsm_private_key: 'ssh-keys/fsm/fsm_rsa'
+fsm_remote_private_key: '{{ fsm_dir }}/.ssh/fsm_rsa'
+fsm_dir: '/home/fsm'
+fsm_public_dir: '{{ fsm_dir }}/site'
+fsm_ssl_enabled: False
+fsm_redirect_domains:
+  - www.friendsofsevamandir.org
+  - www.friendsofsevamandir.com
+  - friendsofsevamandir.com

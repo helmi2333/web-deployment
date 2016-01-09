@@ -1,2 +1,2 @@
 ---
-- apt: name=mysql state=present
+- apt: name=mysql-server state=present

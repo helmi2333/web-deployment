@@ -11,3 +11,6 @@ copy-certs:
 	mkdir -p certs
 	rsync --checksum --human-readable --archive --verbose --compress --perms \
 		--stats wildebeest-root:/etc/letsencrypt/ certs/
+
+fsm:
+	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook fsm.yml

@@ -3,4 +3,5 @@
   hosts: droplets
 
   roles:
+    - php
     - fsm

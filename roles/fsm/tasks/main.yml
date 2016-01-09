@@ -1,1 +1,29 @@
 ---
+- group: name=fsm state=present
+
+- user: name=fsm group=fsm append=yes
+
+- file: path={{ fsm_dir }}/.ssh
+        state=directory
+        mode=0755
+        group=fsm
+  become: yes
+  become_user: fsm
+
+- name: copy fsm deployment key to remote server
+  copy: src={{ fsm_private_key }} dest={{ fsm_remote_private_key }} mode=0400
+  become: yes
+  become_user: fsm
+
+- git: repo=git@bitbucket.org:kevinburke/fsm.git
+       dest={{ fsm_public_dir }}
+       key_file={{ fsm_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: fsm
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/friendsofsevamandir.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx

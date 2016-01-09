@@ -26,6 +26,8 @@ main() {
     pushd "$directory"
         ./configure --enable-pcntl --with-curl --with-mcrypt --enable-mbstring \
             --with-openssl --enable-fpm --with-mysql --with-libedit \
+            --with-fpm-user=php \
+            --with-fpm-group=php \
             --with-libdir=/lib/x86_64-linux-gnu \
             --prefix="$prefix"
         make

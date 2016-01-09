@@ -4,14 +4,14 @@
 - user: name=twentyms group=twentyms append=yes
 
 - file: path={{ twentyms_dir }}/.ssh
-        state=directory 
+        state=directory
         mode=0755
         group=twentyms
   become: yes
   become_user: twentyms
 
 #- file: path={{ vrusability_directory }}
-        #state=directory 
+        #state=directory
         #mode=0755
         #group=twentyms
   #become: yes
@@ -34,9 +34,9 @@
   become: yes
   become_user: twentyms
 
-- file: path={{ hyde_theme_directory }} 
-        state=directory 
-        mode=0755 
+- file: path={{ hyde_theme_directory }}
+        state=directory
+        mode=0755
         group=twentyms
   become: yes
   become_user: twentyms
