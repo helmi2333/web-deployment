@@ -4,7 +4,7 @@
 - user: name=doony group=doony append=yes
 
 - file: path={{ doony_dir }}/.ssh
-        state=directory 
+        state=directory
         mode=0755
         group=doony
   become: yes
