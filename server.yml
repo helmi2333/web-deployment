@@ -1,0 +1,9 @@
+---
+- name: Provision the server
+  hosts: droplets
+
+  roles:
+    - timezone
+
+  tasks:
+    - apt: name=htop state=present
