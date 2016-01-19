@@ -3,6 +3,8 @@
 
 - user: name=php group=php append=yes
 
+- user: name=nginx groups=php append=yes
+
 - name: get php version
   command: "/home/php/bin/php -r 'echo phpversion();' "
   register: result
@@ -17,11 +19,9 @@
   become: yes
   become_user: php
 
-- file: path=/home/php/log
+- file: path=/var/log/php-fpm
         state=directory
         mode=0755
-  become: yes
-  become_user: php
 
 - file: path=/home/php/run
         state=directory

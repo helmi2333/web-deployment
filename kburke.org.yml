@@ -1,0 +1,6 @@
+---
+- name: Install kburke.org
+  hosts: droplets
+
+  roles:
+    - kburke.org

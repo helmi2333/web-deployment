@@ -16,3 +16,6 @@
     - athenian.me
     - tarbz2.com
     - fsm
+
+- include: kburke.org.yml
+- include: athenian.me.yml

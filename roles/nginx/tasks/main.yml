@@ -1,4 +1,8 @@
 ---
+- group: name=nginx
+
+- user: name=nginx groups=nginx append=yes
+
 - name: get nginx version
   command: "{{ nginx_binary }} -v"
   register: result
