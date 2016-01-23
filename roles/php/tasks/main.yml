@@ -13,30 +13,43 @@
 - include: install.yml
   when: result.rc != 0 or result.stdout != '{{ php_version }}'
 
-- file: path=/home/php/etc/fpm.d
+- file: path={{ php_home_dir }}/etc/fpm.d
         state=directory
         mode=0755
   become: yes
   become_user: php
 
-- file: path=/var/log/php-fpm
+- file: path={{ php_log_dir }}
         state=directory
         mode=0755
 
-- file: path=/home/php/run
+- file: path={{ php_home_dir }}/run
         state=directory
         mode=0755
   become: yes
   become_user: php
 
-- template: src=php-fpm.conf
-            dest=/home/php/etc/php-fpm.conf
+- name: write the base php-fpm.conf
+  template: src=php-fpm.conf
+            dest={{ php_home_dir }}/etc/php-fpm.conf
             owner=php
             group=php
             mode=0644
   become: yes
   become_user: php
+  notify: reload php
 
-- template: src=php-fpm.initd
+- name: write php.ini
+  template: src=php.ini
+            dest={{ php_home_dir }}/lib/php.ini
+            owner=php
+            group=php
+            mode=0644
+  become: yes
+  become_user: php
+  notify: reload php
+
+- name: write /etc/init.d/php-fpm
+  template: src=php-fpm.initd
             dest=/etc/init.d/php-fpm
             mode=0755

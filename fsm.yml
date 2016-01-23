@@ -3,5 +3,8 @@
   hosts: droplets
 
   roles:
-    - php
+    - role: php
+      open_basedirs:
+        - "{{ php_home_dir }}/public/"
+        - "{{ fsm_public_dir }}/"
     - fsm

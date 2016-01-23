@@ -1,2 +1,5 @@
 ---
 php_version: '5.6.16'
+php_log_dir: '/var/log/php'
+php_home_dir: '/home/php'
+php_socket: '{{ php_home_dir }}/run/php-fpm.sock'
