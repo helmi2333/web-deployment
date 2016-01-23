@@ -1,0 +1,6 @@
+---
+- name: Install burke.services
+  hosts: droplets
+
+  roles:
+    - burke.services
