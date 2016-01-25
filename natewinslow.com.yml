@@ -1,0 +1,6 @@
+---
+- name: Install natewinslow.com
+  hosts: droplets
+
+  roles:
+    - natewinslow.com

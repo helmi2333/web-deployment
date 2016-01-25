@@ -1,0 +1,20 @@
+---
+- group: name=natewinslow state=present
+
+- user: name=natewinslow group=natewinslow append=yes
+
+- file: path=/home/natewinslow/public
+        state=directory
+        mode=0755
+        group=natewinslow
+  become: yes
+  become_user: natewinslow
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/natewinslow.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/natewinslow/public -d natewinslow.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/natewinslow/public -d www.natewinslow.com --renew-by-default --email kev@inburke.com --text --agree-tos
