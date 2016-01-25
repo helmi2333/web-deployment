@@ -1,0 +1,6 @@
+---
+- name: Install mattokazaki.com
+  hosts: droplets
+
+  roles:
+    - mattokazaki.com

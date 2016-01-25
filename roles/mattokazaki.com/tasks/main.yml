@@ -1,0 +1,20 @@
+---
+- group: name=mattokazaki state=present
+
+- user: name=mattokazaki group=mattokazaki append=yes
+
+- file: path=/home/mattokazaki/public
+        state=directory
+        mode=0755
+        group=mattokazaki
+  become: yes
+  become_user: mattokazaki
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/mattokazaki.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/mattokazaki/public -d mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/mattokazaki/public -d www.mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos

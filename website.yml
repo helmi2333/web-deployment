@@ -14,7 +14,6 @@
     - twentymilliseconds
     - athenian.me
     - tarbz2.com
-    - fsm
 
 - include: server.yml
 - include: kburke.org.yml

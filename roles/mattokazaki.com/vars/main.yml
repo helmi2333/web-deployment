@@ -1,0 +1,5 @@
+---
+matto_ssl_enabled: True
+matto_upstream: 'http://{{ matto_upstream_host }}/matthewokazaki/'
+matto_upstream_host: 'cargocollective.com'
+matto_home: '/home/mattokazaki'
