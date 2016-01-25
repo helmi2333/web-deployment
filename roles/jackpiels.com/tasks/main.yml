@@ -1,0 +1,32 @@
+---
+- group: name=jackpiels state=present
+
+- user: name=jackpiels group=jackpiels append=yes
+
+- file: path=/home/jackpiels/.ssh
+        state=directory
+        mode=0755
+        group=jackpiels
+  become: yes
+  become_user: jackpiels
+
+- name: copy jackpiels.com deployment key to remote server
+  copy: src={{ jackpiels_private_key }} dest={{ jackpiels_remote_private_key }} mode=0400
+  become: yes
+  become_user: jackpiels
+
+- git: repo=git@bitbucket.org:kevinburke/jackpiels.com.git
+       dest=/home/jackpiels/public
+       accept_hostkey=yes
+       key_file={{ jackpiels_remote_private_key }}
+  become: yes
+  become_user: jackpiels
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/jackpiels.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/jackpiels/public -d jackpiels.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/jackpiels/public -d www.jackpiels.com --renew-by-default --email kev@inburke.com --text --agree-tos

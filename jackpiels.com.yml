@@ -1,0 +1,6 @@
+---
+- name: Install jackpiels.com
+  hosts: droplets
+
+  roles:
+    - jackpiels.com

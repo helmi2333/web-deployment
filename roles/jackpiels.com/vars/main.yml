@@ -1,0 +1,4 @@
+---
+jackpiels_private_key: 'ssh-keys/jackpiels/jackpiels_rsa'
+jackpiels_remote_private_key: '/home/jackpiels/.ssh/jackpiels_rsa'
+jackpiels_ssl_enabled: True
