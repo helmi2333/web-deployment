@@ -1,0 +1,6 @@
+---
+- name: Install laurakashiwase.com
+  hosts: droplets
+
+  roles:
+    - laurakashiwase.com

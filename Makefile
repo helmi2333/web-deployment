@@ -20,3 +20,6 @@ matto:
 
 jackpiels:
 	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook jackpiels.com.yml
+
+laura:
+	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook laurakashiwase.com.yml
