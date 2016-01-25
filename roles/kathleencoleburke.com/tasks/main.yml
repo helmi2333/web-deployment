@@ -1,0 +1,20 @@
+---
+- group: name=kathleencoleburke state=present
+
+- user: name=kathleencoleburke group=kathleencoleburke append=yes
+
+- file: path=/home/kathleencoleburke/public
+        state=directory
+        mode=0755
+        group=kathleencoleburke
+  become: yes
+  become_user: kathleencoleburke
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/kathleencoleburke.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/kathleencoleburke/public -d kathleencoleburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/kathleencoleburke/public -d www.kathleencoleburke.com --renew-by-default --email kev@inburke.com --text --agree-tos

@@ -1,0 +1,6 @@
+---
+- name: Install kathleencoleburke.com
+  hosts: droplets
+
+  roles:
+    - kathleencoleburke.com
