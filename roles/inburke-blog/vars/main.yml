@@ -1,0 +1,5 @@
+---
+wordpress_version: '4.4.1'
+wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
+wordpress_url: https://github.com/WordPress/WordPress.git
+wordpress_debug: False

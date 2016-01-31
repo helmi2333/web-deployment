@@ -1,0 +1,10 @@
+---
+- name: Install stage.inburke.com
+  hosts: droplets
+
+  roles:
+    - role: inburke-blog
+      user: stage
+      directory: "/home/{{ user }}"
+  vars_files:
+    - roles/stage.inburke.com/vars/wordpress.yml

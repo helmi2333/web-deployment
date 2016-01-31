@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: letsencrypt }
+  - { role: nginx }
+  - { role: mysql }

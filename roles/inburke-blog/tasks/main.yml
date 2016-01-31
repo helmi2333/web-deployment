@@ -1,0 +1,36 @@
+---
+- group: name={{ user }} state=present
+
+- user: name={{ user }} group={{ user }} append=yes
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- file: path={{ directory }}/public
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- file: path={{ directory }}/tmp
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: clone Wordpress
+  git: repo={{ wordpress_url }}
+       dest={{ directory }}/public
+       version={{ wordpress_version }}
+
+- name: copy wp-config.php into place
+  template: src=wp-config.php
+            dest={{ directory }}/public/wp-config.php
+            owner={{ user }}
+            group={{ user }}
