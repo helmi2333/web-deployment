@@ -1,0 +1,31 @@
+---
+
+- git: repo=https://github.com/kevinburke/slides.git
+       dest={{ directory }}/public/slides
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=https://github.com/kevinburke/deck.js.git
+       dest={{ directory }}/public/slides/static
+  become: yes
+  become_user: "{{ user }}"
+
+- file: path={{ directory }}/public/slides/static/extensions
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=https://github.com/kevinburke/deck.js-kevin-theme.git
+       dest={{ directory }}/public/slides/static/extensions/kevinburke
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=https://github.com/iros/deck.js-codemirror.git
+       dest={{ directory }}/public/slides/static/extensions/codemirror
+  become: yes
+  become_user: "{{ user }}"
+
+# note: there is some slides-related code in the nginx config, but it all
+# needs to go in one block so it's not included/rendered here.

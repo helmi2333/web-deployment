@@ -1,0 +1,20 @@
+---
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy letter deployment key to remote server
+  copy: src={{ letter_private_key }} dest={{ letter_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/letter.git
+       dest={{ directory }}/public/letter
+       key_file={{ letter_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"

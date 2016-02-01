@@ -6,5 +6,9 @@
     - role: inburke-blog
       user: stage
       directory: "/home/{{ user }}"
+      domain: stage.inburke.com
+      inburke_ssl_enabled: True
+
+  # This file is encrypted
   vars_files:
     - roles/stage.inburke.com/vars/wordpress.yml

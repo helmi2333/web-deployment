@@ -17,7 +17,8 @@
   become: yes
   become_user: "{{ user }}"
 
-- file: path={{ directory }}/tmp
+- name: create letsencrypt cert verification directory
+  file: path={{ directory }}/public/.well-known
         state=directory
         mode=0755
         group={{ user }}
@@ -28,9 +29,63 @@
   git: repo={{ wordpress_url }}
        dest={{ directory }}/public
        version={{ wordpress_version }}
+  become: yes
+  become_user: "{{ user }}"
 
 - name: copy wp-config.php into place
   template: src=wp-config.php
             dest={{ directory }}/public/wp-config.php
             owner={{ user }}
             group={{ user }}
+
+- git: repo=https://github.com/kevinburke/2013.git
+       dest={{ directory }}/public/wp-content/themes/flat-ui
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=https://github.com/kevinburke/syntaxhighlighter.git
+       dest={{ directory }}/public/wp-content/plugins/syntaxhighlighter
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=https://github.com/kevinburke/tweets.git
+       dest={{ directory }}/public/twitter
+  become: yes
+  become_user: "{{ user }}"
+
+- name: install slides
+  include: slides.yml
+
+- name: install letter
+  include: letter.yml
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/{{ domain }}.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+- git: repo=https://github.com/kevinburke/blog.git
+       dest={{ directory }}/public/static/rawblog
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy etc deployment key to remote server
+  copy: src={{ etc_private_key }} dest={{ etc_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/etc.git
+       dest={{ directory }}/data
+       key_file={{ etc_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy etc files into place
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data {{ directory }}/public'
+  become: yes
+  become_user: "{{ user }}"
+
+
+  # - /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tosecome_user: "{{ user }}"

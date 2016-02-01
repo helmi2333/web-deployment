@@ -3,3 +3,8 @@ wordpress_version: '4.4.1'
 wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
 wordpress_url: https://github.com/WordPress/WordPress.git
 wordpress_debug: False
+inburke_ssl_enabled: False
+letter_private_key: ssh-keys/inburke.com/letter_rsa
+letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
+etc_private_key: ssh-keys/inburke.com/etc_rsa
+etc_remote_private_key: "{{ directory }}/.ssh/etc_rsa"
