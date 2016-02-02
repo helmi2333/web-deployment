@@ -83,7 +83,8 @@
   become_user: "{{ user }}"
 
 - name: copy etc files into place
-  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data {{ directory }}/public'
+  # trailing slash after data is important
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data/ {{ directory }}/public'
   become: yes
   become_user: "{{ user }}"
 
