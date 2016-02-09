@@ -2,3 +2,4 @@
 dependencies:
   - {role: nginx}
   - {role: libxml2}
+  - {role: mysql}
