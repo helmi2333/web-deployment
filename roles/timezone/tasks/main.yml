@@ -1,10 +1,6 @@
 ---
 - name: Set timezone to UTC
-  copy: content='UTC'
-        dest=/etc/timezone
-        owner=root
-        group=root
-        mode=0644
-        backup=yes
-  notify:
-    - update timezone
+  command: 'timedatectl set-timezone UTC'
+
+- name: Set timezone to UTC (another way)
+  command: 'ln -sf /usr/share/zoneinfo/Etc/GMT /etc/localtime'
