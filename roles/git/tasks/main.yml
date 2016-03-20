@@ -1,2 +1,4 @@
 ---
-- apt: name=git state=present
+- apt_repository: repo="ppa:git-core/ppa"
+
+- apt: name=git state=present update_cache=yes

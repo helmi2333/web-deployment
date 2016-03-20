@@ -3,48 +3,8 @@
 
 - user: name=letsencrypt group=letsencrypt append=yes
 
-- apt: name=git state=present
-
-- git: repo=https://github.com/Shyp/crontroller.git
-       dest=/home/letsencrypt/crontroller
-       accept_hostkey=yes
-  become: yes
-  become_user: letsencrypt
-
 - git: repo=https://github.com/letsencrypt/letsencrypt.git
        dest=/opt/letsencrypt
-
-- file: path=/home/letsencrypt/bin
-        state=directory
-        mode=0755
-        group=letsencrypt
-  become: yes
-  become_user: letsencrypt
-
-- name: copy crontroller script to the bin directory
-  command: cp /home/letsencrypt/crontroller/crontroller /home/letsencrypt/bin/crontroller
-  become: yes
-  become_user: letsencrypt
-
-- file: path=/home/letsencrypt/cfg
-        state=directory
-        mode=0755
-        group=letsencrypt
-  become: yes
-  become_user: letsencrypt
-
-- file: path=/home/letsencrypt/cfg/cron
-        state=directory
-        mode=0755
-        group=letsencrypt
-  become: yes
-  become_user: letsencrypt
-
-- template: src=cron.env
-            dest=/home/letsencrypt/cfg/cron/env
-            owner=letsencrypt
-            group=letsencrypt
-            mode=0400
 
 # keeping local permissions in sync got very difficult so we just store them
 # with kevin:staff and then chown root:root in the next task.
@@ -64,3 +24,6 @@
         owner=root
         group=root
         follow=yes
+
+- name: set up cron
+  include: cron.yml

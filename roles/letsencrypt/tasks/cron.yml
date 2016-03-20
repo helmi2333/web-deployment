@@ -1,0 +1,50 @@
+---
+- git: repo=https://github.com/Shyp/crontroller.git
+       dest=/home/letsencrypt/crontroller
+       accept_hostkey=yes
+  become: yes
+  become_user: letsencrypt
+
+- file: path=/home/letsencrypt/bin
+        state=directory
+        mode=0755
+        group=letsencrypt
+  become: yes
+  become_user: letsencrypt
+
+- name: copy crontroller script to the bin directory
+  command: cp /home/letsencrypt/crontroller/crontroller /home/letsencrypt/bin/crontroller
+  become: yes
+  become_user: letsencrypt
+
+- file: path=/home/letsencrypt/cfg
+        state=directory
+        mode=0755
+        group=letsencrypt
+  become: yes
+  become_user: letsencrypt
+
+- file: path=/home/letsencrypt/cfg/cron
+        state=directory
+        mode=0755
+        group=letsencrypt
+  become: yes
+  become_user: letsencrypt
+
+- template: src=cron.env
+            dest=/home/letsencrypt/cfg/cron/env
+            owner=letsencrypt
+            group=letsencrypt
+            mode=0400
+
+- file: path=/home/letsencrypt/logs
+        state=directory
+        mode=0755
+        group=letsencrypt
+  become: yes
+  become_user: letsencrypt
+
+- name: install cron to renew certificates
+  cron: name="renew certificates"
+        hour=0
+        job="cd /home/letsencrypt; . /home/letsencrypt/cfg/cron/env; /home/letsencrypt/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c '. /home/letsencrypt/cfg/cron/env ; /opt/letsencrypt/letsencrypt-auto renew --email kev@inburke.com --agree-tos' "
