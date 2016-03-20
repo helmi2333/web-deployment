@@ -27,6 +27,11 @@ laura:
 nate:
 	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook natewinslow.com.yml
 
+letsencrypt:
+	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
+		ansible-playbook letsencrypt.yml \
+		--vault-password-file=passwords/ansible-vault.password
+
 stage:
 	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
 		ansible-playbook stage.inburke.com.yml \
