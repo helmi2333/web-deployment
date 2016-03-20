@@ -4,6 +4,7 @@
   hosts: droplets
 
   roles:
+    - timezone
     - letsencrypt
     - vim
     - kevin
@@ -11,10 +12,17 @@
     - doony
     - php
     - jenkins
-    - twentymilliseconds
+
     - athenian.me
+    #- brianburke.net
+    - burke.services
+    - jackpiels.com
+    - kathleencoleburke.com
+    - kburke.org
+    - laurakashiwase.com
+    - mattokazaki.com
+    - natewinslow.com
     - tarbz2.com
+    - twentymilliseconds
 
 - include: server.yml
-- include: kburke.org.yml
-- include: athenian.me.yml
