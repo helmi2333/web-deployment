@@ -29,6 +29,6 @@
             group=nginx
   notify: reload nginx
 
-# cron: ./letsencrypt-auto  certonly --webroot -w /home/doony/doony -d doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
-# cron: ./letsencrypt-auto  certonly --webroot -w /home/doony/doony -d www.doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
-# cron: ./letsencrypt-auto  certonly --webroot -w /home/doony/doony -d jenkins.doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
+# cron: /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/doony/doony -d doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
+# cron: /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/doony/doony -d www.doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
+# cron: /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/doony/doony -d jenkins.doony.org --renew-by-default --email kev@inburke.com --text --agree-tos
