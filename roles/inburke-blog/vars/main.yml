@@ -8,3 +8,7 @@ letter_private_key: ssh-keys/inburke.com/letter_rsa
 letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
 etc_private_key: ssh-keys/inburke.com/etc_rsa
 etc_remote_private_key: "{{ directory }}/.ssh/etc_rsa"
+font_private_key: ssh-keys/inburke.com/font_rsa
+font_remote_private_key: "{{ directory }}/.ssh/font_rsa"
+luxr_private_key: ssh-keys/inburke.com/luxr_rsa
+luxr_remote_private_key: "{{ directory }}/.ssh/luxr_rsa"

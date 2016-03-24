@@ -82,6 +82,30 @@
   become: yes
   become_user: "{{ user }}"
 
+- name: copy font deployment key to remote server
+  copy: src={{ font_private_key }} dest={{ font_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/inburke_fonts.git
+       dest={{ directory }}/public/static/font
+       key_file={{ font_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy luxr deployment key to remote server
+  copy: src={{ luxr_private_key }} dest={{ luxr_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/luxr_git.git
+       dest={{ directory }}/public/static/luxr
+       key_file={{ luxr_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"
+
 - name: copy etc files into place
   # trailing slash after data is important
   command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data/ {{ directory }}/public'
