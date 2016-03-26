@@ -12,3 +12,5 @@ font_private_key: ssh-keys/inburke.com/font_rsa
 font_remote_private_key: "{{ directory }}/.ssh/font_rsa"
 luxr_private_key: ssh-keys/inburke.com/luxr_rsa
 luxr_remote_private_key: "{{ directory }}/.ssh/luxr_rsa"
+resume_private_key: ssh-keys/inburke.com/resume_rsa
+resume_remote_private_key: "{{ directory }}/.ssh/resume_rsa"

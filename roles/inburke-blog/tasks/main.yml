@@ -66,7 +66,7 @@
   notify: reload nginx
 
 - git: repo=https://github.com/kevinburke/blog.git
-       dest={{ directory }}/public/static/rawblog
+       dest={{ directory }}/public/rawblog
   become: yes
   become_user: "{{ user }}"
 
@@ -88,7 +88,7 @@
   become_user: "{{ user }}"
 
 - git: repo=git@bitbucket.org:kevinburke/inburke_fonts.git
-       dest={{ directory }}/public/static/font
+       dest={{ directory }}/public/font
        key_file={{ font_remote_private_key }}
        accept_hostkey=yes
   become: yes
@@ -100,8 +100,20 @@
   become_user: "{{ user }}"
 
 - git: repo=git@bitbucket.org:kevinburke/luxr_git.git
-       dest={{ directory }}/public/static/luxr
+       dest={{ directory }}/public/luxr
        key_file={{ luxr_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy resume deployment key to remote server
+  copy: src={{ resume_private_key }} dest={{ resume_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/resume.git
+       dest={{ directory }}/public/resume
+       key_file={{ resume_remote_private_key }}
        accept_hostkey=yes
   become: yes
   become_user: "{{ user }}"
