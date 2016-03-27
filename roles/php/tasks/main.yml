@@ -1,4 +1,7 @@
 ---
+- set_fact:
+    open_basedirs="{{ open_basedirs }} + [ '{{ php_file_directory }}' ]"
+
 - group: name=php state=present
 
 - user: name=php group=php append=yes
@@ -38,6 +41,8 @@
   become: yes
   become_user: php
   notify: reload php
+
+- debug: var=open_basedirs
 
 - name: write php.ini
   template: src=php.ini

@@ -8,6 +8,7 @@
       directory: "/home/{{ user }}"
       domain: stage.inburke.com
       inburke_ssl_enabled: True
+      php_file_directory: "/home/{{ user }}/public/"
 
   # This file is encrypted
   vars_files:
