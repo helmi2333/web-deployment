@@ -9,6 +9,8 @@
       domain: stage.inburke.com
       inburke_ssl_enabled: True
       php_file_directory: "/home/{{ user }}/public/"
+      local_database_dump: databases/stage.dump.sql
+      remote_database_dump: "{{ directory }}/tmp/stage.dump.sql"
 
   # This file is encrypted
   vars_files:

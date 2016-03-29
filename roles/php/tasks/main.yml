@@ -12,6 +12,7 @@
   command: "/home/php/bin/php -r 'echo phpversion();' "
   register: result
   ignore_errors: True
+  changed_when: result.rc != 0 or result.stdout != '{{ php_version }}'
 
 - include: install.yml
   when: result.rc != 0 or result.stdout != '{{ php_version }}'
@@ -22,9 +23,13 @@
   become: yes
   become_user: php
 
+# Needs to be writable by the php-fpm www processes, which run as the php user,
+# or error_log will fail silently
 - file: path={{ php_log_dir }}
         state=directory
         mode=0755
+        owner=php
+        group=php
 
 - file: path={{ php_home_dir }}/run
         state=directory
@@ -42,7 +47,7 @@
   become_user: php
   notify: reload php
 
-- debug: var=open_basedirs
+#- debug: var=open_basedirs
 
 - name: write php.ini
   template: src=php.ini

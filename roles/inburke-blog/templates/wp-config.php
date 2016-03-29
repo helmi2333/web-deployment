@@ -93,5 +93,13 @@ if ( !defined('ABSPATH') ) {
 	define('ABSPATH', dirname(__FILE__) . '/');
 }
 
+/**
+ * Required for Cloudflare forwarding
+ * https://codex.wordpress.org/Function_Reference/is_ssl
+ */
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');

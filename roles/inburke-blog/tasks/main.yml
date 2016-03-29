@@ -25,6 +25,27 @@
   become: yes
   become_user: "{{ user }}"
 
+- name: create mysql user {{ database_user }}
+  mysql_user: name={{ database_user }}
+              password={{ database_password }}
+              priv={{ database_name }}.*:ALL,GRANT
+              login_host={{ database_host }}
+              state=present
+
+- name: ensure {{ database_name }} is present
+  mysql_db: name={{ database_name }}
+            state=present
+            login_host={{ database_host }}
+            login_password={{ database_password }}
+            login_user={{ database_user }}
+
+- name: check whether database is imported
+  command: "/usr/bin/mysql --database={{ database_name }} --password={{ database_password }} --user={{ database_user }} --host={{ database_host }} --execute='show tables'"
+  register: result
+
+- include: import_database.yml
+  when: result.stdout_lines | length == 0
+
 - name: clone Wordpress
   git: repo={{ wordpress_url }}
        dest={{ directory }}/public
