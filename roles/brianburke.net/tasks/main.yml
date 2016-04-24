@@ -1,7 +1,11 @@
 ---
 - group: name=brianburke state=present
 
-- user: name=brianburke group=brianburke append=yes
+- user: name=brianburke
+        group=brianburke
+        append=yes
+        shell=/bin/bash
+        password={{ password }}
 
 - file: path={{ directory }}/.ssh
         state=directory

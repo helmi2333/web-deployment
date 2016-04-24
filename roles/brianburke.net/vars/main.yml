@@ -1,5 +1,9 @@
 ---
 user: brianburke
+# Password is in 1Password. Generated with:
+# openssl passwd -1 -salt Pw6zUq3T 'thepassword'
+# http://unix.stackexchange.com/q/81240/9519
+password: $1$Pw6zUq3T$rz1BgrfY5KX8rDC8Fy1bF/
 directory: "/home/{{ user }}"
 domain: brianburke.net
 wordpress_version: '4.4.2'
