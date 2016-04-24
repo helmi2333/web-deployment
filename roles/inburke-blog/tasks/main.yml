@@ -48,11 +48,16 @@
 
 - name: clone Wordpress
   git: repo={{ wordpress_url }}
-       dest={{ directory }}/public
+       dest={{ directory }}/wordpress
        version={{ wordpress_version }}
        depth=1
   become: yes
   become_user: "{{ user }}"
+
+- name: Copy Wordpress files into the public folder
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
+  args:
+    creates: "{{ directory }}/wp-includes"
 
 - name: copy wp-config.php into place
   template: src=wp-config.php
@@ -81,7 +86,8 @@
 - name: install letter
   include: letter.yml
 
-- template: src=nginx.conf
+- name: render wordpress nginx template
+  template: src=nginx.conf
             dest={{ nginx_include_dir }}/{{ domain }}.conf
             owner=nginx
             group=nginx

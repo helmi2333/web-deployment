@@ -1,0 +1,6 @@
+---
+- name: Install tarbz2.com
+  hosts: droplets
+
+  roles:
+    - tarbz2.com

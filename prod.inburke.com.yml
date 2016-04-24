@@ -1,0 +1,31 @@
+---
+- name: Install kev.inburke.com
+  hosts: droplets
+
+  roles:
+    - role: inburke-blog
+      user: inburke
+      directory: "/home/{{ user }}"
+      domain: kev.inburke.com
+      inburke_ssl_enabled: True
+      # this is a shitty hack but it's not worth the time to figure out how to
+      # do this properly
+      php_file_directory: "/home/{{ user }}/public/"
+      local_database_dump: databases/prod.dump.sql
+      remote_database_dump: "{{ directory }}/tmp/prod.dump.sql"
+      redirect_domains:
+        - www.kev.inburke.com
+        - inburke.com
+        - www.inburke.com
+
+  #vars:
+    #open_basedirs: "[ '{{ php_file_directory }}' ]"
+
+  # This file is encrypted
+  vars_files:
+    - roles/stage.inburke.com/vars/kev.inburke.com.wordpress.yml
+
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d www.kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d www.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos

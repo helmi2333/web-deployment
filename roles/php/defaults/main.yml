@@ -1,3 +1,6 @@
 ---
+# This is really shitty but I don't have time to fix it
 open_basedirs:
   - "{{ php_home_dir }}/public/"
+  - "/home/stage/public/"
+  - "/home/inburke/public/"

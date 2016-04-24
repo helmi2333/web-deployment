@@ -1,6 +1,8 @@
 ---
-- set_fact:
-    open_basedirs="{{ open_basedirs }} + [ '{{ php_file_directory }}' ]"
+# TODO figure out how to append to this from different roles and not clobber
+# what's already on the file system if running a subset of roles
+#- set_fact:
+    #open_basedirs="{{ open_basedirs }} + [ '{{ php_file_directory }}' ]"
 
 - group: name=php state=present
 
@@ -47,7 +49,7 @@
   become_user: php
   notify: reload php
 
-#- debug: var=open_basedirs
+- debug: var=open_basedirs
 
 - name: write php.ini
   template: src=php.ini
