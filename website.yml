@@ -4,7 +4,7 @@
   hosts: droplets
 
   roles:
-    - timezone
+    - common
     - letsencrypt
     - vim
     - kevin

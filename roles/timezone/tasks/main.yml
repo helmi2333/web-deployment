@@ -1,6 +1,0 @@
----
-- name: Set timezone to UTC
-  command: 'timedatectl set-timezone UTC'
-
-- name: Set timezone to UTC (another way)
-  command: 'ln -sf /usr/share/zoneinfo/Etc/GMT /etc/localtime'

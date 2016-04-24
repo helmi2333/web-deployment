@@ -1,0 +1,6 @@
+---
+- name: Install common
+  hosts: droplets
+
+  roles:
+    - common

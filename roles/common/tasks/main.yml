@@ -1,0 +1,35 @@
+---
+- group: name=crontroller state=present
+
+- user: name=crontroller group=crontroller append=yes
+
+- git: repo=https://github.com/Shyp/crontroller.git
+       dest=/home/crontroller/bin
+       accept_hostkey=yes
+  become: yes
+  become_user: crontroller
+
+- file: path=/home/crontroller/cfg
+        state=directory
+        mode=0755
+        group=crontroller
+  become: yes
+  become_user: crontroller
+
+- template: src=mandrill.env
+            dest=/home/crontroller/cfg/env
+            owner=crontroller
+            group=crontroller
+            mode=0400
+
+- name: apply security updates
+  cron: name="apply security updates"
+        hour=0
+        minute=1
+        job="cd /home/crontroller; . /home/crontroller/cfg/env; /home/crontroller/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c 'unattended-upgrades -v' "
+
+- name: Set timezone to UTC
+  command: 'timedatectl set-timezone UTC'
+
+- name: Set timezone to UTC (another way)
+  command: 'ln -sf /usr/share/zoneinfo/Etc/GMT /etc/localtime'
