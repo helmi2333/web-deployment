@@ -3,6 +3,7 @@
   hosts: droplets
 
   roles:
+    - role: common
     - role: inburke-blog
       user: inburke
       directory: "/home/{{ user }}"
@@ -15,6 +16,8 @@
         - www.kev.inburke.com
         - inburke.com
         - www.inburke.com
+      syntaxhighlighter_version: 'kevinburke-3.2.1'
+      wordpress_version: '4.5'
 
     - role: mysql_database
       local_database_dump: databases/prod.dump.sql

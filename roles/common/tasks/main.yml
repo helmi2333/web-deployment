@@ -33,3 +33,5 @@
 
 - name: Set timezone to UTC (another way)
   command: 'ln -sf /usr/share/zoneinfo/Etc/GMT /etc/localtime'
+
+- apt: name=zip,unzip state=present

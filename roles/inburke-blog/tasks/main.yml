@@ -25,7 +25,7 @@
   become: yes
   become_user: "{{ user }}"
 
-- name: clone Wordpress
+- name: "clone Wordpress version {{ wordpress_version }}"
   git: repo={{ wordpress_url }}
        dest={{ directory }}/wordpress
        version={{ wordpress_version }}
@@ -35,8 +35,6 @@
 
 - name: Copy Wordpress files into the public folder
   command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
-  args:
-    creates: "{{ directory }}/wp-includes"
 
 - name: copy wp-config.php into place
   template: src=wp-config.php
@@ -44,18 +42,37 @@
             owner={{ user }}
             group={{ user }}
 
-- git: repo=https://github.com/kevinburke/2013.git
+- name: Check out the 2013 kevin theme
+  git: repo=https://github.com/kevinburke/2013.git
        dest={{ directory }}/public/wp-content/themes/flat-ui
+       version=master
   become: yes
   become_user: "{{ user }}"
 
-- git: repo=https://github.com/kevinburke/syntaxhighlighter.git
+- name: Get the akismet repo
+  get_url: url={{ akismet_url }}
+           dest={{ directory }}/tmp/akismet.zip
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install akismet
+  unarchive:
+    src={{ directory }}/tmp/akismet.zip
+    dest={{ directory }}/public/wp-content/plugins
+    copy=no
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Check out the syntaxhighlighter plugin
+  git: repo=https://github.com/kevinburke/syntaxhighlighter.git
        dest={{ directory }}/public/wp-content/plugins/syntaxhighlighter
+       version={{ syntaxhighlighter_version }}
   become: yes
   become_user: "{{ user }}"
 
 - git: repo=https://github.com/kevinburke/tweets.git
        dest={{ directory }}/public/twitter
+       version=master
   become: yes
   become_user: "{{ user }}"
 

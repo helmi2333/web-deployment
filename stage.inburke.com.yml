@@ -3,6 +3,7 @@
   hosts: droplets
 
   roles:
+    - role: common
     - role: inburke-blog
       user: stage
       directory: "/home/{{ user }}"
@@ -11,7 +12,14 @@
       php_file_directory: "/home/{{ user }}/public/"
       local_database_dump: databases/stage.dump.sql
       remote_database_dump: "{{ directory }}/tmp/stage.dump.sql"
+      wordpress_version: '4.5'
+      redirect_domains:
+        - www.stage.inburke.com
+      syntaxhighlighter_version: 'develop'
 
   # This file is encrypted
   vars_files:
     - roles/stage.inburke.com/vars/wordpress.yml
+
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/stage/public -d stage.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/stage/public -d www.stage.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos

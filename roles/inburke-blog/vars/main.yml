@@ -1,9 +1,13 @@
 ---
-wordpress_version: '4.4.2'
+wordpress_version: '4.5'
 wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
 wordpress_url: https://github.com/WordPress/WordPress.git
 wordpress_debug: False
 inburke_ssl_enabled: False
+syntaxhighlighter_version: 'master'
+
+akismet_version: '3.1.10'
+akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
 
 letter_private_key: ssh-keys/inburke.com/letter_rsa
 letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
