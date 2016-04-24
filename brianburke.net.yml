@@ -5,7 +5,7 @@
 
   roles:
     - role: brianburke.net
-      brianburke_ssl_enabled: False
+      brianburke_ssl_enabled: True
 
     - role: mysql_database
       local_database_dump: databases/brianburke.net.dump.sql
