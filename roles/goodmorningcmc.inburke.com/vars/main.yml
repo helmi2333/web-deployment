@@ -1,0 +1,4 @@
+---
+goodmorningcmc_private_key: 'ssh-keys/goodmorningcmc/goodmorningcmc_rsa'
+goodmorningcmc_remote_private_key: '/home/goodmorningcmc/.ssh/goodmorningcmc_rsa'
+goodmorningcmc_ssl_enabled: True

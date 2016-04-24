@@ -2,3 +2,4 @@
 tarbz2_private_key: 'ssh-keys/tarbz2/tarbz2_rsa'
 tarbz2_remote_private_key: '/home/tarbz2/.ssh/tarbz2_rsa'
 tarbz2_ssl_enabled: True
+tarbz2_user: tarbz2

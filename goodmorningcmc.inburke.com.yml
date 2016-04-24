@@ -1,0 +1,6 @@
+---
+- name: Install goodmorningcmc.inburke.com
+  hosts: droplets
+
+  roles:
+    - goodmorningcmc.inburke.com

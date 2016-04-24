@@ -1,0 +1,32 @@
+---
+- group: name=goodmorningcmc state=present
+
+- user: name=goodmorningcmc group=goodmorningcmc append=yes
+
+- file: path=/home/goodmorningcmc/.ssh
+        state=directory
+        mode=0755
+        group=goodmorningcmc
+  become: yes
+  become_user: goodmorningcmc
+
+- name: copy goodmorningcmc deployment key to remote server
+  copy: src={{ goodmorningcmc_private_key }} dest={{ goodmorningcmc_remote_private_key }} mode=0400
+  become: yes
+  become_user: goodmorningcmc
+
+- git: repo=git@github.com:kevinburke/goodmorningcmc-static.git
+       dest=/home/goodmorningcmc/public
+       accept_hostkey=yes
+       key_file={{ goodmorningcmc_remote_private_key }}
+  become: yes
+  become_user: goodmorningcmc
+
+- template: src=nginx.conf
+            dest={{ nginx_include_dir }}/goodmorningcmc.inburke.com.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/goodmorningcmc/public -d goodmorningcmc.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/goodmorningcmc/public -d www.goodmorningcmc.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
