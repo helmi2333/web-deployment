@@ -1,0 +1,16 @@
+---
+user: brianburke
+directory: "/home/{{ user }}"
+domain: brianburke.net
+wordpress_version: '4.4.2'
+wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
+
+redirect_domains:
+  - www.brianburke.net
+
+wordpress_url: https://github.com/WordPress/WordPress.git
+wordpress_debug: False
+brianburke_ssl_enabled: False
+
+brianburke_wp_content_private_key: ssh-keys/brianburke/brianburke_wp-content_rsa
+brianburke_wp_content_remote_private_key: "{{ directory }}/.ssh/brianburke_wp-content_rsa"

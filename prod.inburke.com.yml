@@ -11,12 +11,14 @@
       # this is a shitty hack but it's not worth the time to figure out how to
       # do this properly
       php_file_directory: "/home/{{ user }}/public/"
-      local_database_dump: databases/prod.dump.sql
-      remote_database_dump: "{{ directory }}/tmp/prod.dump.sql"
       redirect_domains:
         - www.kev.inburke.com
         - inburke.com
         - www.inburke.com
+
+    - role: mysql_database
+      local_database_dump: databases/prod.dump.sql
+      remote_database_dump: "{{ directory }}/tmp/prod.dump.sql"
 
   #vars:
     #open_basedirs: "[ '{{ php_file_directory }}' ]"

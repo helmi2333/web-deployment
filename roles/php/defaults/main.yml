@@ -4,3 +4,4 @@ open_basedirs:
   - "{{ php_home_dir }}/public/"
   - "/home/stage/public/"
   - "/home/inburke/public/"
+  - "/home/brianburke/public/"

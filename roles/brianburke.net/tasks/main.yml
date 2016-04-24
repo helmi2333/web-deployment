@@ -1,0 +1,92 @@
+---
+- group: name=brianburke state=present
+
+- user: name=brianburke group=brianburke append=yes
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- file: path={{ directory }}/public
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- name: create letsencrypt cert verification directory
+  file: path={{ directory }}/public/.well-known
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- name: create sessions directory for counterize plugin calling session_start().
+  file: path={{ directory }}/public/sessions
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- name: clone Wordpress
+  git: repo={{ wordpress_url }}
+       dest={{ directory }}/wordpress
+       version={{ wordpress_version }}
+       depth=1
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Copy Wordpress files into the public folder
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
+  args:
+    creates: "{{ directory }}/public/wp-includes"
+
+- name: copy wp-config.php into place
+  template: src=wp-config.php
+            dest={{ directory }}/public/wp-config.php
+            owner={{ user }}
+            group={{ user }}
+
+- file: path={{ directory }}/data
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- file: path={{ directory }}/data/wp-content
+        state=directory
+        mode=0755
+        group=brianburke
+  become: yes
+  become_user: brianburke
+
+- name: copy wp-content deployment key to remote server
+  copy: src={{ brianburke_wp_content_private_key }} dest={{ brianburke_wp_content_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@github.com:kevinburke/brianburke-wp-content.git
+       dest={{ directory }}/data/wp-content
+       key_file={{ brianburke_wp_content_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy wp-content files into place
+  # trailing slash after data is important
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data/wp-content/ {{ directory }}/public/wp-content'
+  become: yes
+  become_user: "{{ user }}"
+
+- name: render wordpress nginx template
+  template: src=nginx.conf
+            dest={{ nginx_include_dir }}/{{ domain }}.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx

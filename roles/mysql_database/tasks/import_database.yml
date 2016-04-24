@@ -1,0 +1,21 @@
+---
+- file: path={{ directory }}/tmp
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy database export to the remote server
+  copy: src={{ local_database_dump }}
+        dest={{ remote_database_dump }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: import wordpress database
+  mysql_db: name={{ database_name }}
+            state=import
+            login_host={{ database_host }}
+            login_password={{ database_password }}
+            login_user={{ database_user }}
+            target={{ remote_database_dump }}

@@ -1,0 +1,15 @@
+---
+
+- name: Install brianburke.net
+  hosts: droplets
+
+  roles:
+    - role: brianburke.net
+      brianburke_ssl_enabled: False
+
+    - role: mysql_database
+      local_database_dump: databases/brianburke.net.dump.sql
+      remote_database_dump: "{{ directory }}/tmp/brianburke.net.dump.sql"
+
+  vars_files:
+    - roles/brianburke.net/vars/wordpress.yml

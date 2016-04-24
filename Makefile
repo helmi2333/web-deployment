@@ -54,3 +54,8 @@ kev.inburke.com:
 	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
 		ansible-playbook prod.inburke.com.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+brianburke:
+	ANSIBLE_KEEP_REMOTE_FILES=1 ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
+		ansible-playbook brianburke.net.yml \
+		--vault-password-file=passwords/ansible-vault.password
