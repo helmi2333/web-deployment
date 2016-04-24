@@ -1,4 +1,5 @@
 ---
 - apt_repository: repo="ppa:git-core/ppa"
 
-- apt: name=git state=present update_cache=yes
+# I have a cron that applies security patches
+- apt: name=git state=present
