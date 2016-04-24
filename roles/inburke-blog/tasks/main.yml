@@ -131,4 +131,4 @@
   become: yes
   become_user: "{{ user }}"
 
-  # - /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tosecome_user: "{{ user }}"
+  # - /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
