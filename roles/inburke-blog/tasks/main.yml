@@ -2,6 +2,7 @@
 - group: name={{ user }} state=present
 
 - user: name={{ user }} group={{ user }} append=yes
+- user: name=php group={{ user }} append=yes
 
 - file: path={{ directory }}/.ssh
         state=directory
@@ -36,9 +37,15 @@
 - name: Copy Wordpress files into the public folder
   command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
 
-- name: copy wp-config.php into place
+- name: render wp-config.php into place
   template: src=wp-config.php
             dest={{ directory }}/public/wp-config.php
+            owner={{ user }}
+            group={{ user }}
+
+- name: render wp-cache-config.php into place
+  template: src=wp-cache-config.php
+            dest={{ directory }}/public/wp-content/plugins/wp-cache-config.php
             owner={{ user }}
             group={{ user }}
 
@@ -60,6 +67,21 @@
     src={{ directory }}/tmp/akismet.zip
     dest={{ directory }}/public/wp-content/plugins
     copy=no
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install wp-super-cache
+  unarchive:
+    src=https://downloads.wordpress.org/plugin/wp-super-cache.{{ super_cache_version }}.zip
+    dest={{ directory }}/public/wp-content/plugins
+    copy=no
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install text-control
+  git: repo=https://github.com/kevinburke/text-control-2.git
+       dest={{ directory }}/public/wp-content/plugins/text-control-2
+       version=master
   become: yes
   become_user: "{{ user }}"
 

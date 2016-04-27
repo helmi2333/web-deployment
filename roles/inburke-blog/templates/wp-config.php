@@ -33,6 +33,8 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+define('WPCACHEHOME', dirname(__FILE__) . '/wp-content/plugins/wp-super-cache/');
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
