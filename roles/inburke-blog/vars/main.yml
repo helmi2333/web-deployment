@@ -6,10 +6,8 @@ wordpress_debug: False
 inburke_ssl_enabled: False
 syntaxhighlighter_version: 'master'
 
-akismet_version: '3.1.10'
+akismet_version: '3.1.11'
 akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
-
-super_cache_version: '1.4.8'
 
 letter_private_key: ssh-keys/inburke.com/letter_rsa
 letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"

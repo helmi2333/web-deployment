@@ -70,14 +70,6 @@
   become: yes
   become_user: "{{ user }}"
 
-- name: Install wp-super-cache
-  unarchive:
-    src=https://downloads.wordpress.org/plugin/wp-super-cache.{{ super_cache_version }}.zip
-    dest={{ directory }}/public/wp-content/plugins
-    copy=no
-  become: yes
-  become_user: "{{ user }}"
-
 - name: Install text-control
   git: repo=https://github.com/kevinburke/text-control-2.git
        dest={{ directory }}/public/wp-content/plugins/text-control-2
