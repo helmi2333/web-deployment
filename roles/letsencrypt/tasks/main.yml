@@ -3,8 +3,8 @@
 
 - user: name=letsencrypt group=letsencrypt append=yes
 
-- git: repo=https://github.com/letsencrypt/letsencrypt.git
-       dest=/opt/letsencrypt
+- git: repo=https://github.com/certbot/certbot.git
+       dest=/opt/certbot
 
 # keeping local permissions in sync got very difficult so we just store them
 # with kevin:staff and then chown root:root in the next task.

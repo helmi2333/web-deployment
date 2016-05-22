@@ -19,6 +19,6 @@
 #- cron: renew certificate for laurakashiwase.com
   #day: 16
   #hour: 13
-  #job: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/laurakashiwase/public -d laurakashiwase.com --renew-by-default --email kev@inburke.com --text --agree-tos
+  #job: /opt/certbot/certbot-auto certonly --webroot -w /home/laurakashiwase/public -d laurakashiwase.com --renew-by-default --email kev@inburke.com --text --agree-tos
 
-# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/laurakashiwase/public -d www.laurakashiwase.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/laurakashiwase/public -d www.laurakashiwase.com --renew-by-default --email kev@inburke.com --text --agree-tos

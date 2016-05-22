@@ -48,4 +48,4 @@
   cron: name="renew certificates"
         hour=0
         minute=0
-        job="cd /home/letsencrypt; . /home/letsencrypt/cfg/cron/env; /home/letsencrypt/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c '. /home/letsencrypt/cfg/cron/env ; /opt/letsencrypt/letsencrypt-auto renew --email kev@inburke.com --agree-tos' "
+        job="cd /home/letsencrypt; . /home/letsencrypt/cfg/cron/env; /home/letsencrypt/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c '. /home/letsencrypt/cfg/cron/env ; /opt/certbot/certbot-auto renew --email kev@inburke.com --agree-tos' "

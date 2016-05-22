@@ -2,7 +2,7 @@
 
 gen_cert() {
   if [[ ! -d "/etc/letsencrypt/live/$2" ]]; then
-    /opt/letsencrypt/letsencrypt-auto certonly --webroot -w "$1" -d "$2" --renew-by-default --email kev@inburke.com --text --agree-tos
+    /opt/certbot/certbot-auto certonly --webroot -w "$1" -d "$2" --renew-by-default --email kev@inburke.com --text --agree-tos
   fi
 }
 

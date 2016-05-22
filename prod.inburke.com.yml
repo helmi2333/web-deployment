@@ -30,7 +30,7 @@
   vars_files:
     - roles/stage.inburke.com/vars/kev.inburke.com.wordpress.yml
 
-# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
-# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d www.kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
-# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d www.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
-# /opt/letsencrypt/letsencrypt-auto  certonly --webroot -w /home/inburke/public -d inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto  certonly --webroot -w /home/inburke/public -d kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto  certonly --webroot -w /home/inburke/public -d www.kev.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto  certonly --webroot -w /home/inburke/public -d www.inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto  certonly --webroot -w /home/inburke/public -d inburke.com --renew-by-default --email kev@inburke.com --text --agree-tos

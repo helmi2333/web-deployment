@@ -29,7 +29,7 @@
   notify: reload nginx
 
 #- name: install SSL certificate
-  #command: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
+  #command: /opt/certbot/certbot-auto certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
 
 # - cron:
-# - cron: ./letsencrypt-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: ./certbot-auto  certonly --webroot -w /home/athenian/public -d athenian.me --renew-by-default --email kev@inburke.com --text --agree-tos

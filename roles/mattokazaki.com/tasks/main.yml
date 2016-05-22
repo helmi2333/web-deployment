@@ -16,5 +16,5 @@
             group=nginx
   notify: reload nginx
 
-# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/mattokazaki/public -d mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos
-# - cron: /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/mattokazaki/public -d www.mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/mattokazaki/public -d mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/mattokazaki/public -d www.mattokazaki.com --renew-by-default --email kev@inburke.com --text --agree-tos

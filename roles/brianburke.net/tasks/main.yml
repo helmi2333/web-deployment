@@ -95,5 +95,5 @@
             group=nginx
   notify: reload nginx
 
-# /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/brianburke/public -d brianburke.net --renew-by-default --email kev@inburke.com --text --agree-tos
-# /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /home/brianburke/public -d www.brianburke.net --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto certonly --webroot -w /home/brianburke/public -d brianburke.net --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto certonly --webroot -w /home/brianburke/public -d www.brianburke.net --renew-by-default --email kev@inburke.com --text --agree-tos
