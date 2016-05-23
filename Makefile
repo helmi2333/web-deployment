@@ -64,3 +64,8 @@ brianburke:
 	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
 		ansible-playbook brianburke.net.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+athenian.me:
+	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
+		ansible-playbook athenian.me.yml \
+		--vault-password-file=passwords/ansible-vault.password

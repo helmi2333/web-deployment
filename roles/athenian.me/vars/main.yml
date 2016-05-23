@@ -1,3 +1,4 @@
 ---
 athenian_private_key: 'ssh-keys/athenian/athenian_rsa'
 athenian_remote_private_key: '/home/athenian/.ssh/athenian_rsa'
+athenian_ssl_enabled: True
