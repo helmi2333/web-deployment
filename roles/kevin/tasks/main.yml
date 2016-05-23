@@ -27,6 +27,7 @@
 - git: repo=git@bitbucket.org:kevinburke/small-dotfiles.git
        dest=/home/kevin/small-dotfiles
        accept_hostkey=yes
+       update=yes
        key_file={{ dotfiles_remote_private_key }}
   become: yes
   become_user: kevin
@@ -36,15 +37,28 @@
     chdir: /home/kevin/small-dotfiles
     creates: /home/kevin/owner.txt
 
-- command: mkdir -p /home/kevin/.vim/autoload /home/kevin/.vim/tmp/undo /home/kevin/.vim/tmp/backup /home/kevin/.vim/tmp/swap
+- apt_repository: repo="ppa:neovim-ppa/unstable"
+- apt: name=neovim state=present
+
+- command: mkdir -p /home/kevin/cfg/vim/autoload /home/kevin/cfg/vim/tmp/undo /home/kevin/cfg/vim/tmp/backup /home/kevin/cfg/vim/tmp/swap
   become: yes
   become_user: kevin
 
-- command: cp /home/kevin/.vim/pathogen/autoload/pathogen.vim /home/kevin/.vim/autoload
+- command: mkdir -p /home/kevin/cfg/nvim/autoload /home/kevin/cfg/nvim/tmp/undo /home/kevin/cfg/nvim/tmp/backup /home/kevin/cfg/nvim/tmp/swap
+  become: yes
+  become_user: kevin
+
+- command: cp /home/kevin/cfg/vim/pathogen/autoload/pathogen.vim /home/kevin/cfg/vim/autoload
   become: yes
   become_user: kevin
   args:
-    creates: /home/kevin/.vim/autoload/pathogen.vim
+    creates: /home/kevin/cfg/vim/autoload/pathogen.vim
+
+- command: cp /home/kevin/cfg/nvim/pathogen/autoload/pathogen.nvim /home/kevin/cfg/nvim/autoload
+  become: yes
+  become_user: kevin
+  args:
+    creates: /home/kevin/cfg/nvim/autoload/pathogen.vim
 
 - file: path=/home/kevin/tmp
         state=directory
