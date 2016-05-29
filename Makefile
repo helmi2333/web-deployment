@@ -26,7 +26,8 @@ matto:
 	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook mattokazaki.com.yml
 
 jackpiels:
-	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook jackpiels.com.yml
+	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook jackpiels.com.yml \
+		--vault-password-file=passwords/ansible-vault.password
 
 laura:
 	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook laurakashiwase.com.yml

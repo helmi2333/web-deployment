@@ -3,4 +3,7 @@
   hosts: droplets
 
   roles:
-    - jackpiels.com
+    - role: jackpiels.com
+
+  vars:
+    - jackpiels_ssl_enabled: True

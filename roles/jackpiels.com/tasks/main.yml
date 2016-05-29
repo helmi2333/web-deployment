@@ -22,6 +22,8 @@
   become: yes
   become_user: jackpiels
 
+- debug: var=jackpiels_ssl_enabled
+
 - template: src=nginx.conf
             dest={{ nginx_include_dir }}/jackpiels.com.conf
             owner=nginx
