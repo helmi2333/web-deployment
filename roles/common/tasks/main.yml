@@ -25,7 +25,7 @@
 - name: apply security updates
   cron: name="apply security updates"
         hour=0
-        minute=1
+        minute=34
         job="cd /home/crontroller; . /home/crontroller/cfg/env; /home/crontroller/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c 'unattended-upgrades -v' "
 
 - name: Set timezone to UTC
