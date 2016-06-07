@@ -5,6 +5,7 @@
 
 - git: repo=https://github.com/certbot/certbot.git
        dest=/opt/certbot
+       update=yes
 
 # keeping local permissions in sync got very difficult so we just store them
 # with kevin:staff and then chown root:root in the next task.
