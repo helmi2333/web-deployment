@@ -32,7 +32,8 @@
   become: yes
   become_user: kevin
 
-- command: cp -na . ..
+- name: copy dotfiles from small-dotfiles to /home/kevin
+  command: cp -na . ..
   args:
     chdir: /home/kevin/small-dotfiles
     creates: /home/kevin/owner.txt
@@ -40,11 +41,13 @@
 - apt_repository: repo="ppa:neovim-ppa/unstable"
 - apt: name=neovim state=present
 
-- command: mkdir -p /home/kevin/cfg/vim/autoload /home/kevin/cfg/vim/tmp/undo /home/kevin/cfg/vim/tmp/backup /home/kevin/cfg/vim/tmp/swap
+- name: make vim/autoload, vim/tmp, vim/swap
+  command: mkdir -p /home/kevin/cfg/vim/autoload /home/kevin/cfg/vim/tmp/undo /home/kevin/cfg/vim/tmp/backup /home/kevin/cfg/vim/tmp/swap
   become: yes
   become_user: kevin
 
-- command: mkdir -p /home/kevin/cfg/nvim/autoload /home/kevin/cfg/nvim/tmp/undo /home/kevin/cfg/nvim/tmp/backup /home/kevin/cfg/nvim/tmp/swap
+- name: make nvim directories
+  command: mkdir -p /home/kevin/cfg/nvim/autoload /home/kevin/cfg/nvim/tmp/undo /home/kevin/cfg/nvim/tmp/backup /home/kevin/cfg/nvim/tmp/swap
   become: yes
   become_user: kevin
 
@@ -54,7 +57,8 @@
   args:
     creates: /home/kevin/cfg/vim/autoload/pathogen.vim
 
-- command: cp /home/kevin/cfg/nvim/pathogen/autoload/pathogen.nvim /home/kevin/cfg/nvim/autoload
+- name: copy nvim pathogen to nvim/autoload
+  command: cp /home/kevin/cfg/nvim/pathogen/autoload/pathogen.vim /home/kevin/cfg/nvim/autoload
   become: yes
   become_user: kevin
   args:
