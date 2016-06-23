@@ -1,0 +1,6 @@
+---
+- name: Install golang
+  hosts: droplets
+
+  roles:
+    - role: go

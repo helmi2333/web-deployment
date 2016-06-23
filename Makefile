@@ -75,3 +75,8 @@ kevin:
 	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" \
 		ansible-playbook kevin.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+go:
+	ANSIBLE_HOSTS="$$PWD/hosts" \
+		ansible-playbook go.yml \
+		--vault-password-file=passwords/ansible-vault.password
