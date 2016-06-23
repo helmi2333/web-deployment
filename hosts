@@ -1,2 +1,5 @@
 [droplets]
 wildebeest ansible_ssh_host=wildebeest-root
+
+[inconshreveable]
+inconshreveable ansible_become_method=sudo ansible_become_user=root ansible_user=ubuntu ansible_become=true ansible_ssh_host=inconshreveable
