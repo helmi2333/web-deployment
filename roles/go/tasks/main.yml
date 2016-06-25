@@ -42,25 +42,22 @@
   args:
     chdir: /home/go/go1.4/src
     creates: /home/go/go1.4/bin/go
+  # https://github.com/golang/go/issues/13114#issuecomment-185931101
+  environment:
+    CGO_ENABLED: 0
   become: yes
   become_user: go
 
-- file: path=/home/go/tmp/go1.7
-        state=directory
-        mode=0755
-        group=go
+- git: repo=https://go.googlesource.com/go
+       dest=/home/go/go
+       update=yes
   become: yes
   become_user: go
 
-- unarchive: src=https://storage.googleapis.com/golang/go1.7beta2.linux-amd64.tar.gz
-             dest=/home/go/tmp/go1.7
-             copy=no
-  become: yes
-  become_user: go
-
-- name: Move go1.7 directory into place
-  command: cp -r /home/go/tmp/go1.7/go /home/go/go
+- name: Install go tip
+  command: ./make.bash
   args:
-    creates: /home/go/go
+    chdir: /home/go/go/src
+    creates: /home/go/go/bin/go
   become: yes
   become_user: go

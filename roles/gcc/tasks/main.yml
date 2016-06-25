@@ -1,3 +1,8 @@
 ---
 - apt: name=build-essential state=present
+  become: yes
+  become_user: root
+
 - apt: name=gcc-4.8 state=present
+  become: yes
+  become_user: root

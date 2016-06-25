@@ -43,3 +43,13 @@ it. Run "make bootstrap" to accomplish this.
 
 If you rebuild the server from the original, you might need to delete the key
 from `~/.ssh/known_hosts`.
+
+## Initial host configuration
+
+You might need to add the following line to `/etc/sudoers.d/ubuntu`
+
+```
+ubuntu ALL=(ALL) NOPASSWD: ALL
+```
+
+Explanation: http://toroid.org/sudoers-syntax
