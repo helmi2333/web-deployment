@@ -12,7 +12,7 @@
       php_file_directory: "/home/{{ user }}/public/"
       local_database_dump: databases/stage.dump.sql
       remote_database_dump: "{{ directory }}/tmp/stage.dump.sql"
-      wordpress_version: '4.5.2'
+      wordpress_version: '4.5.3'
       redirect_domains:
         - www.stage.inburke.com
       syntaxhighlighter_version: 'develop'
