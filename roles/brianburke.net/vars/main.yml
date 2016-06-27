@@ -6,7 +6,6 @@ user: brianburke
 password: $1$Pw6zUq3T$rz1BgrfY5KX8rDC8Fy1bF/
 directory: "/home/{{ user }}"
 domain: brianburke.net
-wordpress_version: '4.5.2'
 wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
 
 redirect_domains:
