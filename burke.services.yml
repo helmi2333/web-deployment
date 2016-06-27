@@ -3,4 +3,5 @@
   hosts: droplets
 
   roles:
-    - burke.services
+    - role: burke.services
+      burke_services_ssl_enabled: True
