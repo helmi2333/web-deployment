@@ -1,63 +1,61 @@
 ---
-- group: name=go state=present
-
-- user: name=go group=go append=yes
-
-- file: path=/home/go/tmp
+- file: path="{{ directory }}/tmp"
         state=directory
         mode=0755
         group=go
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
-- file: path=/home/go/tmp/go1.4
+- file: path={{ directory }}/tmp/go1.4
         state=directory
         mode=0755
         group=go
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
 - unarchive: src=https://storage.googleapis.com/golang/go1.4.3.src.tar.gz
-             dest=/home/go/tmp/go1.4
+             dest={{ directory }}/tmp/go1.4
              copy=no
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
-- file: path=/home/go/tmp/go1.4
+- file: path={{ directory }}/tmp/go1.4
         state=directory
         mode=0755
         group=go
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
 - name: Move go1.4 directory into place
-  command: cp -r /home/go/tmp/go1.4/go /home/go/go1.4
+  command: cp -r {{ directory }}/tmp/go1.4/go {{ directory }}/go1.4
   args:
-    creates: /home/go/go1.4
+    creates: "{{ directory }}/go1.4"
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
 - name: Install go 1.4
   command: ./make.bash
   args:
-    chdir: /home/go/go1.4/src
-    creates: /home/go/go1.4/bin/go
+    chdir: "{{ directory }}/go1.4/src"
+    creates: "{{ directory }}/go1.4/bin/go"
   # https://github.com/golang/go/issues/13114#issuecomment-185931101
   environment:
     CGO_ENABLED: 0
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
 - git: repo=https://go.googlesource.com/go
-       dest=/home/go/go
+       dest={{ directory }}/go
        update=yes
   become: yes
-  become_user: go
+  become_user: "{{ user }}"
 
 - name: Install go tip
   command: ./make.bash
   args:
-    chdir: /home/go/go/src
-    creates: /home/go/go/bin/go
+    chdir: "{{ directory }}/go/src"
+    creates: "{{ directory }}/go/bin/go"
+  environment:
+    GOROOT_BOOTSTRAP: "{{ directory }}/go1.4"
   become: yes
-  become_user: go
+  become_user: "{{ user }}"

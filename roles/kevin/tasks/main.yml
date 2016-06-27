@@ -7,6 +7,10 @@
         append=yes
         password={{ password }}
 
+- user: name=kevin
+        group=go
+        append=yes
+
 - file: path=/home/kevin/.ssh
         state=directory
         mode=0755

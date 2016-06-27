@@ -4,3 +4,4 @@
 
   roles:
     - role: go
+      user: kevin
