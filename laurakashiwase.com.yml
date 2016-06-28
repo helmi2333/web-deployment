@@ -3,4 +3,5 @@
   hosts: droplets
 
   roles:
-    - laurakashiwase.com
+    - role: laurakashiwase.com
+      laura_ssl_enabled: True

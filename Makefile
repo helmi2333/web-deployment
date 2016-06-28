@@ -30,7 +30,8 @@ jackpiels:
 		--vault-password-file=passwords/ansible-vault.password
 
 laura:
-	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook laurakashiwase.com.yml
+	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook laurakashiwase.com.yml \
+		--vault-password-file=passwords/ansible-vault.password
 
 nate:
 	ANSIBLE_NOCOWS=1 ANSIBLE_HOSTS="$$PWD/hosts" ansible-playbook natewinslow.com.yml
