@@ -10,6 +10,41 @@
   become: yes
   become_user: burkeservices
 
+- name: copy tictactoebot deployment key to remote server
+  copy: src={{ tictactoe_private_key }} dest={{ tictactoe_remote_private_key }} mode=0400
+  become: yes
+  become_user: kevin
+
+- command: mkdir -p /usr/local/go/src/bitbucket.org/kevinburke
+  become: yes
+  become_user: kevin
+
+- git: repo=git@bitbucket.org:kevinburke/tictactoebot.git
+       dest=/usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
+       key_file={{ tictactoe_remote_private_key }}
+       accept_hostkey=yes
+       version=1.0
+  become: yes
+  become_user: kevin
+
+- command: /home/go/go/bin/go get ./...
+  args:
+    chdir: /usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
+  become: yes
+  become_user: kevin
+  environment:
+    GOPATH: /usr/local/go
+    GOROOT: /home/go/go
+
+- command: /home/go/go/bin/go install ./...
+  args:
+    chdir: /usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
+  become: yes
+  become_user: kevin
+  environment:
+    GOPATH: /usr/local/go
+    GOROOT: /home/go/go
+
 - template: src=nginx.conf
             dest={{ nginx_include_dir }}/burke.services.conf
             owner=nginx
@@ -20,3 +55,4 @@
   #command: /opt/certbot/certbot-auto certonly --webroot -w /home/burkeservices/site/public -d burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
 
 # - cron: /opt/certbot/certbot-auto  certonly --webroot -w /home/burkeservices/site/public -d www.burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/certbot/certbot-auto  certonly --webroot -w /home/burkeservices/site/public -d slack.burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
