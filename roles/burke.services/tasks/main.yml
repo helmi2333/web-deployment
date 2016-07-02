@@ -23,7 +23,7 @@
        dest=/usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
        key_file={{ tictactoe_remote_private_key }}
        accept_hostkey=yes
-       version=1.0
+       version=1.1
   become: yes
   become_user: kevin
 
