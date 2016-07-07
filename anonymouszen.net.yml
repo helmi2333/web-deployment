@@ -1,0 +1,12 @@
+---
+
+- name: Install anonymouszen.net
+  hosts: droplets
+
+  roles:
+    - role: anonymouszen.net
+      anonymouszen_ssl_enabled: False
+      wordpress_version: '4.5.3'
+
+  vars_files:
+    - roles/anonymouszen.net/vars/wordpress.yml

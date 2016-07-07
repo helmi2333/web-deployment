@@ -5,3 +5,4 @@ open_basedirs:
   - "/home/stage/public/"
   - "/home/inburke/public/"
   - "/home/brianburke/public/"
+  - "/home/anonymouszen/public/"

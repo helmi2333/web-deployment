@@ -1,0 +1,89 @@
+---
+- group: name={{ user }} state=present
+
+- user: name={{ user }}
+        group={{ user }}
+        append=yes
+        shell=/bin/bash
+        password={{ password }}
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- file: path={{ directory }}/public
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: create letsencrypt cert verification directory
+  file: path={{ directory }}/public/.well-known
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: create sessions directory for counterize plugin calling session_start().
+  file: path={{ directory }}/public/sessions
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: clone Wordpress
+  git: repo={{ wordpress_url }}
+       dest={{ directory }}/wordpress
+       version={{ wordpress_version }}
+       depth=1
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Copy Wordpress files into the public folder
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
+  args:
+    creates: "{{ directory }}/public/wp-includes"
+
+- name: copy wp-config.php into place
+  template: src=wp-config.php
+            dest={{ directory }}/public/wp-config.php
+            owner={{ user }}
+            group={{ user }}
+
+- file: path={{ directory }}/data
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- file: path={{ directory }}/data/wp-content
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy wp-content files into place
+  # trailing slash after data is important
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/data/wp-content/ {{ directory }}/public/wp-content'
+  become: yes
+  become_user: "{{ user }}"
+
+- name: render wordpress nginx template
+  template: src=nginx.conf
+            dest={{ nginx_include_dir }}/{{ domain }}.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx
+
+# /opt/certbot/certbot-auto certonly --webroot -w /home/anonymouszen/public -d anonymouszen.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto certonly --webroot -w /home/anonymouszen/public -d www.anonymouszen.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto certonly --webroot -w /home/anonymouszen/public -d anonymouszen.net --renew-by-default --email kev@inburke.com --text --agree-tos
+# /opt/certbot/certbot-auto certonly --webroot -w /home/anonymouszen/public -d www.anonymouszen.net --renew-by-default --email kev@inburke.com --text --agree-tos

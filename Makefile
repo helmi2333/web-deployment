@@ -86,3 +86,8 @@ burke.services:
 	ANSIBLE_HOSTS="$$PWD/hosts" \
 		ansible-playbook burke.services.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+anonymouszen.net:
+	ANSIBLE_HOSTS="$$PWD/hosts" \
+		ansible-playbook anonymouszen.net.yml \
+		--vault-password-file=passwords/ansible-vault.password

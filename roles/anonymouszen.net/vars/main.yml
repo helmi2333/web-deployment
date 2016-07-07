@@ -1,0 +1,22 @@
+---
+user: anonymouszen
+# Password is in 1Password. Generated with:
+# openssl passwd -1 -salt Pw6zUq3T 'thepassword'
+# http://unix.stackexchange.com/q/81240/9519
+password: $1$nBDvYj86$hfp115ajTXGSrtiQzGYqx0
+directory: "/home/{{ user }}"
+wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
+
+domain: anonymouszen.net
+redirect_domains:
+  - www.anonymouszen.com
+  - anonymouszen.com
+  - www.anonymouszen.net
+
+wordpress_url: https://github.com/WordPress/WordPress.git
+wordpress_debug: False
+anonymouszen_ssl_enabled: True
+anonymouszen_behind_cloudflare: False
+
+anonymouszen_wp_content_private_key: ssh-keys/anonymouszen/anonymouszen_wp-content_rsa
+anonymouszen_wp_content_remote_private_key: "{{ directory }}/.ssh/anonymouszen_wp-content_rsa"
