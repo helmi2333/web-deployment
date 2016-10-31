@@ -1,5 +1,5 @@
 ---
-nginx_version: '1.8.0'
+nginx_version: '1.10.2'
 nginx_dir: '/home/nginx'
 nginx_include_dir: '{{nginx_dir}}/etc/includes'
 nginx_sbin_dir: '{{ nginx_dir }}/sbin'
