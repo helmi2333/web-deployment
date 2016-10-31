@@ -16,6 +16,11 @@
             group=nginx
   notify: reload nginx
 
+- copy: src=index.html
+        dest=/home/laurakashiwase/public
+        group=laurakashiwase
+        mode=0644
+
 #- cron: renew certificate for laurakashiwase.com
   #day: 16
   #hour: 13
