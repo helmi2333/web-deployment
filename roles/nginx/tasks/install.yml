@@ -1,8 +1,18 @@
 ---
-- apt: name=build-essential,gcc-4.8,git,curl,libpcre3-dev,libssl1.0.0,libssl-dev state=present
+- apt: name=build-essential,gcc-4.8,git,curl,libpcre3-dev,luajit,libluajit-5.1-2,libssl1.0.0,libssl-dev state=present
 
 - name: Create bin
   file: path=/home/nginx/bin state=directory mode=0755
+  become: yes
+  become_user: nginx
+
+- name: Create conf
+  file: path=/home/nginx/conf state=directory mode=0755
+  become: yes
+  become_user: nginx
+
+- name: Create sbin
+  file: path=/home/nginx/sbin state=directory mode=0755
   become: yes
   become_user: nginx
 
@@ -12,6 +22,6 @@
   become_user: nginx
 
 - name: Run the installer
-  command: /home/nginx/bin/install
+  shell: /home/nginx/bin/install > /home/nginx/install.log 2>&1
   become: yes
   become_user: nginx
