@@ -8,7 +8,7 @@ directory: "/home/{{ user }}"
 wordpress_zip: "{{ directory }}/tmp/{{ wordpress_version }}.tar.gz"
 
 domain: anonymouszen.net
-redirect_domains:
+anonymouszen_redirect_domains:
   - www.anonymouszen.com
   - anonymouszen.com
   - www.anonymouszen.net

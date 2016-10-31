@@ -52,7 +52,7 @@
   notify: reload nginx
 
 #- name: install SSL certificate
-  #command: /opt/certbot/certbot-auto certonly --webroot -w /home/burkeservices/site/public -d burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
+#  command: /opt/certbot/certbot-auto certonly --webroot -w /home/burkeservices/site/public -d burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
 
 # - cron: /opt/certbot/certbot-auto  certonly --webroot -w /home/burkeservices/site/public -d www.burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: /opt/certbot/certbot-auto  certonly --webroot -w /home/burkeservices/site/public -d slack.burke.services --renew-by-default --email kev@inburke.com --text --agree-tos
