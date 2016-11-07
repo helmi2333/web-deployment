@@ -8,9 +8,9 @@
   register: result
   ignore_errors: True
 
-- name: download and compile nginx
-  include: install.yml
-  when: result.rc != 0 or result.stderr != "nginx version{{':'}} nginx/{{nginx_version}}"
+#- name: download and compile nginx
+  #include: install.yml
+  #when: result.rc != 0 or result.stderr != "nginx version{{':'}} nginx/{{nginx_version}}"
 
 - file: path={{ nginx_include_dir }} state=directory mode=0755
   become: yes

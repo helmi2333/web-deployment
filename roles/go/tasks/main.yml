@@ -1,4 +1,8 @@
 ---
+- group: name=go state=present
+
+- user: name={{ user }} groups=go append=yes
+
 - file: path="{{ directory }}/tmp"
         state=directory
         mode=0755

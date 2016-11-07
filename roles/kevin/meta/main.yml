@@ -3,3 +3,5 @@ dependencies:
   - {role: git}
   - {role: zsh}
   - {role: ag}
+  - role: go
+    user: kevin
