@@ -52,7 +52,7 @@
 - name: Check out the 2013 kevin theme
   git: repo=https://github.com/kevinburke/2013.git
        dest={{ directory }}/public/wp-content/themes/flat-ui
-       version=1.3
+       version={{ inburke_theme_version }}
   become: yes
   become_user: "{{ user }}"
 

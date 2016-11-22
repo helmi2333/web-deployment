@@ -18,3 +18,5 @@ luxr_private_key: ssh-keys/inburke.com/luxr_rsa
 luxr_remote_private_key: "{{ directory }}/.ssh/luxr_rsa"
 resume_private_key: ssh-keys/inburke.com/resume_rsa
 resume_remote_private_key: "{{ directory }}/.ssh/resume_rsa"
+
+inburke_theme_version: 1.4

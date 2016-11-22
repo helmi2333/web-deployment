@@ -61,5 +61,6 @@
     creates: "{{ directory }}/go/bin/go"
   environment:
     GOROOT_BOOTSTRAP: "{{ directory }}/go1.4"
+    GOGC: 10
   become: yes
   become_user: "{{ user }}"
