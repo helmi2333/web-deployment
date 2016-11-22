@@ -2,3 +2,4 @@
 tictactoe_private_key: ssh-keys/burke.services/tictactoebot_rsa
 tictactoe_remote_private_key: "/home/kevin/.ssh/tictactoebot_rsa"
 burke_services_slack_ssl_enabled: True
+burke_services_version: 1.4

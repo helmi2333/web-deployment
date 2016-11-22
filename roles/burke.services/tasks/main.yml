@@ -6,7 +6,8 @@
 - git: repo=https://github.com/kevinburke/burke.services.git
        dest=/home/burkeservices/site
        depth=1
-       version=1.3
+       version={{ burke_services_version }}
+       update=yes
   become: yes
   become_user: burkeservices
 
@@ -14,6 +15,12 @@
   copy: src={{ tictactoe_private_key }} dest={{ tictactoe_remote_private_key }} mode=0400
   become: yes
   become_user: kevin
+
+- file: path=/usr/local/go
+        state=directory
+        mode=0755
+        group=go
+        owner=kevin
 
 - command: mkdir -p /usr/local/go/src/bitbucket.org/kevinburke
   become: yes
@@ -27,23 +34,23 @@
   become: yes
   become_user: kevin
 
-- command: /home/go/go/bin/go get ./...
+- command: /home/kevin/go/bin/go get ./...
   args:
     chdir: /usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
   become: yes
   become_user: kevin
   environment:
     GOPATH: /usr/local/go
-    GOROOT: /home/go/go
+    GOROOT: /home/kevin/go
 
-- command: /home/go/go/bin/go install ./...
+- command: /home/kevin/go/bin/go install ./...
   args:
     chdir: /usr/local/go/src/bitbucket.org/kevinburke/tictactoebot
   become: yes
   become_user: kevin
   environment:
     GOPATH: /usr/local/go
-    GOROOT: /home/go/go
+    GOROOT: /home/kevin/go
 
 - template: src=nginx.conf
             dest={{ nginx_include_dir }}/burke.services.conf
