@@ -98,3 +98,8 @@ anonymouszen.net:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
 		ansible-playbook anonymouszen.net.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+doony:
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
+		ansible-playbook doony.yml \
+		--vault-password-file=passwords/ansible-vault.password

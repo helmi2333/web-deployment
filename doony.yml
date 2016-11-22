@@ -1,0 +1,6 @@
+---
+- name: Install doony.org
+  hosts: droplets
+
+  roles:
+    - doony
