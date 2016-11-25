@@ -1,0 +1,6 @@
+---
+- name: Install twentymilliseconds.com
+  hosts: droplets
+
+  roles:
+    - twentymilliseconds

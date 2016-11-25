@@ -29,7 +29,8 @@ fsm:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible-playbook fsm.yml
 
 matto:
-	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible-playbook mattokazaki.com.yml
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible-playbook mattokazaki.com.yml \
+		--vault-password-file=passwords/ansible-vault.password
 
 jackpiels:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible-playbook jackpiels.com.yml \
@@ -102,4 +103,19 @@ anonymouszen.net:
 doony:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
 		ansible-playbook doony.yml \
+		--vault-password-file=passwords/ansible-vault.password
+
+kathleen:
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
+		ansible-playbook kathleencoleburke.com.yml \
+		--vault-password-file=passwords/ansible-vault.password
+
+kburke.org:
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
+		ansible-playbook kburke.org.yml \
+		--vault-password-file=passwords/ansible-vault.password
+
+twentymilliseconds.com:
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
+		ansible-playbook twentymilliseconds.com.yml \
 		--vault-password-file=passwords/ansible-vault.password
