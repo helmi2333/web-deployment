@@ -3,7 +3,7 @@
 set -ex
 
 main() {
-  local version='5.6.16'
+  local version='5.6.28'
   local directory="php-$version"
   local binary="$directory.tar.bz2"
   local prefix=/home/php
