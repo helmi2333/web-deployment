@@ -4,20 +4,28 @@
 
   roles:
     - role: common
+
+    # Variables for this role are encrypted / provided by vars_files below.
+    - role: mysql_database
+      user: stage
+      directory: /home/stage
+
     - role: inburke-blog
       user: stage
       directory: "/home/{{ user }}"
       domain: stage.inburke.com
       inburke_ssl_enabled: True
       php_file_directory: "/home/{{ user }}/public/"
-      local_database_dump: databases/stage.dump.sql
-      remote_database_dump: "{{ directory }}/tmp/stage.dump.sql"
       wordpress_version: '4.6.1'
       redirect_domains:
         - www.stage.inburke.com
       syntaxhighlighter_version: 'develop'
 
-  # This file is encrypted
+  # This file is encrypted and includes
+  # - database_user
+  # - database_password
+  #
+  # etc etc
   vars_files:
     - roles/stage.inburke.com/vars/wordpress.yml
 

@@ -31,6 +31,7 @@
        dest={{ directory }}/wordpress
        version={{ wordpress_version }}
        depth=1
+       update=yes
   become: yes
   become_user: "{{ user }}"
 
@@ -55,6 +56,15 @@
        version={{ inburke_theme_version }}
   become: yes
   become_user: "{{ user }}"
+
+- name: Create temp directory
+  file: path={{ directory }}/tmp
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
 
 - name: Get the akismet repo
   get_url: url={{ akismet_url }}
