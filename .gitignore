@@ -1,6 +1,8 @@
-ssh-keys
-certs
-databases
-passwords
-backups
-webf-backup
+/ssh-keys
+/certs
+/databases
+/passwords
+/backups
+/webf-backup
+
+/deploy-*/config.yml
