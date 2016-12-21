@@ -1,0 +1,20 @@
+---
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy golf deployment key to remote server
+  copy: src={{ golf_private_key }} dest={{ golf_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@github.com:kevinburke/east-bay-open.git
+       dest={{ directory }}/public/east-bay-open
+       key_file={{ golf_remote_private_key }}
+       accept_hostkey=yes
+  become: yes
+  become_user: "{{ user }}"

@@ -106,6 +106,9 @@
 - name: install letter
   include: letter.yml
 
+- name: install golf
+  include: east-bay-open.yml
+
 - name: render wordpress nginx template
   template: src=nginx.conf
             dest={{ nginx_include_dir }}/{{ domain }}.conf

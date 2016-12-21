@@ -10,6 +10,8 @@ akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version 
 
 letter_private_key: ssh-keys/inburke.com/letter_rsa
 letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
+golf_private_key: ssh-keys/inburke.com/golf_rsa
+golf_remote_private_key: "{{ directory }}/.ssh/golf_rsa"
 etc_private_key: ssh-keys/inburke.com/etc_rsa
 etc_remote_private_key: "{{ directory }}/.ssh/etc_rsa"
 font_private_key: ssh-keys/inburke.com/font_rsa
