@@ -1,6 +1,72 @@
+- group: name={{ user }} state=present
+
+- user: name={{ user }} group={{ user }} append=yes
+- user: name=php group={{ user }} append=yes
+
 - file: path={{ directory }}/public
         state=directory
         mode=0755
         group={{ user }}
   become: yes
   become_user: "{{ user }}"
+
+- name: "clone Wordpress version {{ wordpress_version }}"
+  git: repo={{ wordpress_url }}
+       dest={{ directory }}/wordpress
+       version={{ wordpress_version }}
+       update=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Copy Wordpress files into the public folder
+  command: 'rsync --archive --filter="- .git/" --filter="+ *" {{ directory }}/wordpress/ {{ directory }}/public'
+
+- include_vars: "{{ wordpress_vars_file }}"
+
+- name: render wp-config.php into place
+  template: src=wp-config.php
+            dest={{ directory }}/public/wp-config.php
+            owner={{ user }}
+            group={{ user }}
+
+- name: create mysql user {{ database_user }}
+  mysql_user: name={{ database_user }}
+              password={{ database_password }}
+              priv={{ database_name }}.*:ALL,GRANT
+              login_host={{ database_host }}
+              state=present
+
+- name: ensure {{ database_name }} is present
+  mysql_db: name={{ database_name }}
+            state=present
+            login_host={{ database_host }}
+            login_password={{ database_password }}
+            login_user={{ database_user }}
+
+- file: path={{ directory }}/tmp
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Get the akismet repo
+  get_url: url={{ akismet_url }}
+           dest={{ directory }}/tmp/akismet.zip
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install akismet
+  unarchive:
+    src={{ directory }}/tmp/akismet.zip
+    dest={{ directory }}/public/wp-content/plugins
+    copy=no
+  become: yes
+  become_user: "{{ user }}"
+
+- name: render wordpress nginx template
+  template: src=nginx.conf
+            dest={{ nginx_include_dir }}/{{ domain }}.conf
+            owner=nginx
+            group=nginx
+  notify: reload nginx

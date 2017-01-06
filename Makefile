@@ -119,3 +119,8 @@ twentymilliseconds.com:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
 		ansible-playbook twentymilliseconds.com.yml \
 		--vault-password-file=passwords/ansible-vault.password
+
+summers:
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \
+		ansible-playbook summers.yml \
+		--vault-password-file=passwords/ansible-vault.password

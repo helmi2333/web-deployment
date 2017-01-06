@@ -1,5 +1,4 @@
 ---
-
 - name: Install brianburke.net
   hosts: droplets
 

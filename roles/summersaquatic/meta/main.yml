@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: wordpress
+    wordpress_ssl_enabled: "{{ summers_ssl_enabled }}"
+    wordpress_vars_file: roles/summersaquatic/vars/wordpress.yml
+    redirect_domains:
+        - www.summersaquaticpt.com
+    local_php_socket: "{{ socket }}"

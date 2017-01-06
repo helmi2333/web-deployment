@@ -1,0 +1,47 @@
+---
+
+- file: path={{ directory }}/.ssh
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: copy theme deployment key to remote server
+  copy: src={{ theme_private_key }} dest={{ theme_remote_private_key }} mode=0400
+  become: yes
+  become_user: "{{ user }}"
+
+- git: repo=git@bitbucket.org:kevinburke/summersaquatic-theme.git
+       dest={{ directory }}/tmp/summersaquatic-theme
+       key_file={{ theme_remote_private_key }}
+       accept_hostkey=yes
+       update=yes
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Copy healthflex theme into the themes folder
+  command: 'rsync --archive {{ directory }}/tmp/summersaquatic-theme/healthflex {{ directory }}/public/wp-content/themes'
+
+- name: Copy healthflex-child theme into the themes folder
+  command: 'rsync --archive {{ directory }}/tmp/summersaquatic-theme/healthflex-child {{ directory }}/public/wp-content/themes'
+
+- name: Copy envato-market plugin into the plugins folder
+  command: 'rsync --archive {{ directory }}/tmp/summersaquatic-theme/healthflex/includes/plugins/envato-market {{ directory }}/public/wp-content/plugins'
+
+- name: Copy js_composer plugin into the plugins folder
+  command: 'rsync --archive {{ directory }}/tmp/summersaquatic-theme/healthflex/includes/plugins/js_composer {{ directory }}/public/wp-content/plugins'
+
+- name: Copy plethora-featureslib plugin into the plugins folder
+  command: 'rsync --archive {{ directory }}/tmp/summersaquatic-theme/healthflex/includes/plugins/plethora-featureslib {{ directory }}/public/wp-content/plugins'
+
+- name: install php-fpm template
+  template: src=php-fpm.conf
+            dest={{ php_home_dir}}/etc/fpm.d/summers.conf
+            owner=php
+            group=php
+            mode=0644
+  notify: reload php
+
+# - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos
+# - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d www.summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos

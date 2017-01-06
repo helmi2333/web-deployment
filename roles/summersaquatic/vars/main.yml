@@ -1,0 +1,4 @@
+theme_private_key: ssh-keys/summersaquatic/theme_rsa
+theme_remote_private_key: "{{ directory }}/.ssh/theme_rsa"
+
+socket: "{{ php_home_dir }}/run/{{ user }}.sock"

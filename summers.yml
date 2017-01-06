@@ -1,0 +1,11 @@
+---
+- name: Install summersaquatic.com
+  hosts: droplets
+
+  roles:
+    - role: summersaquatic
+      summers_ssl_enabled: True
+      user: summers
+      directory: "/home/{{ user }}"
+      domain: summersaquaticpt.com
+      wordpress_version: '4.7'

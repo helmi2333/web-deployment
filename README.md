@@ -53,3 +53,5 @@ ubuntu ALL=(ALL) NOPASSWD: ALL
 ```
 
 Explanation: http://toroid.org/sudoers-syntax
+
+## Ansible Vault

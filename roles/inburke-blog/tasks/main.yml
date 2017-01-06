@@ -65,7 +65,6 @@
   become: yes
   become_user: "{{ user }}"
 
-
 - name: Get the akismet repo
   get_url: url={{ akismet_url }}
            dest={{ directory }}/tmp/akismet.zip

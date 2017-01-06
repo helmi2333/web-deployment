@@ -1,0 +1,4 @@
+wordpress_url: https://github.com/WordPress/WordPress.git
+
+akismet_version: '3.1.11'
+akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
