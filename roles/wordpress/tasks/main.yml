@@ -50,6 +50,13 @@
   become: yes
   become_user: "{{ user }}"
 
+- file: path={{ directory }}/public/wp-uploads/tmp
+        state=directory
+        mode=0755
+        group={{ user }}
+  become: yes
+  become_user: "{{ user }}"
+
 - name: Get the akismet repo
   get_url: url={{ akismet_url }}
            dest={{ directory }}/tmp/akismet.zip

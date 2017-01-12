@@ -95,6 +95,8 @@ if ( !defined('ABSPATH') ) {
 	define('ABSPATH', dirname(__FILE__) . '/');
 }
 
+define('WP_TEMP_DIR', dirname(__FILE__) . '/wp-uploads/tmp');
+
 /**
  * Required for Cloudflare forwarding
  * https://codex.wordpress.org/Function_Reference/is_ssl
