@@ -3,7 +3,7 @@
 set -ex
 
 main() {
-  local version='5.6.28'
+  local version='5.6.30'
   local directory="php-$version"
   local binary="$directory.tar.bz2"
   local prefix=/home/php
@@ -27,6 +27,7 @@ main() {
         ./configure --enable-pcntl --with-curl --with-mcrypt --enable-mbstring \
             --with-openssl --enable-fpm \
             --with-mysql \
+            --with-gd \
             --with-mysqli \
             --with-libedit \
             --with-fpm-user=php \

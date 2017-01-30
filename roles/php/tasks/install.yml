@@ -1,5 +1,5 @@
 ---
-- apt: name=libcurl4-openssl-dev,libxml2,libmcrypt-dev,libedit-dev state=present
+- apt: name=libcurl4-openssl-dev,libxml2,libmcrypt-dev,libedit-dev,libpng16-dev state=present
 
 - name: Create bin
   file: path=/home/php/bin state=directory mode=0755
