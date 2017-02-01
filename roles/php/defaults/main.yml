@@ -7,5 +7,6 @@ open_basedirs:
   - "/home/brianburke/public/"
   - "/home/anonymouszen/public/"
   - "/home/summers/public/"
+  - "/tmp"
 
 php_socket: '{{ php_home_dir }}/run/php-fpm.sock'

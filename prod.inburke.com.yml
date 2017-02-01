@@ -17,7 +17,7 @@
         - inburke.com
         - www.inburke.com
       syntaxhighlighter_version: 'kevinburke-3.2.1'
-      wordpress_version: '4.6.1'
+      wordpress_version: '4.7.2'
 
     #- role: mysql_database
       #local_database_dump: databases/prod.dump.sql

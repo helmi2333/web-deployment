@@ -6,7 +6,7 @@
   roles:
     - role: anonymouszen.net
       anonymouszen_ssl_enabled: True
-      wordpress_version: '4.6.1'
+      wordpress_version: '4.7.2'
 
   vars_files:
     - roles/anonymouszen.net/vars/wordpress.yml
