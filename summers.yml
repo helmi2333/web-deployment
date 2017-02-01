@@ -8,4 +8,4 @@
       user: summers
       directory: "/home/{{ user }}"
       domain: summersaquaticpt.com
-      wordpress_version: '4.7.1'
+      wordpress_version: '4.7.2'
