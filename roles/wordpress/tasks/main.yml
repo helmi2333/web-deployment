@@ -59,13 +59,13 @@
 
 - name: Get the akismet repo
   get_url: url={{ akismet_url }}
-           dest={{ directory }}/tmp/akismet.zip
+           dest={{ directory }}/tmp/akismet-{{ akismet_version }}.zip
   become: yes
   become_user: "{{ user }}"
 
 - name: Install akismet
   unarchive:
-    src={{ directory }}/tmp/akismet.zip
+    src={{ directory }}/tmp/akismet-{{ akismet_version }}.zip
     dest={{ directory }}/public/wp-content/plugins
     copy=no
   become: yes
