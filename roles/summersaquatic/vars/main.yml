@@ -2,3 +2,7 @@ theme_private_key: ssh-keys/summersaquatic/theme_rsa
 theme_remote_private_key: "{{ directory }}/.ssh/theme_rsa"
 
 socket: "{{ php_home_dir }}/run/{{ user }}.sock"
+
+faq_version: "1.0.3"
+faq_url: "https://downloads.wordpress.org/plugin/quick-and-easy-faqs.{{ faq_version }}.zip"
+faq_tmp: "{{ directory }}/tmp/faq-{{ faq_version }}.zip"

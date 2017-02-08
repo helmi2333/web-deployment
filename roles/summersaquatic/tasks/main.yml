@@ -1,5 +1,4 @@
 ---
-
 - file: path={{ directory }}/.ssh
         state=directory
         mode=0755
@@ -42,6 +41,20 @@
             group=php
             mode=0644
   notify: reload php
+
+- name: Get the easy faq repo
+  get_url: url={{ faq_url }}
+           dest={{ faq_tmp }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install faq
+  unarchive:
+    src={{ faq_tmp }}
+    dest={{ directory }}/public/wp-content/plugins
+    copy=no
+  become: yes
+  become_user: "{{ user }}"
 
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d www.summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos
