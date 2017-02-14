@@ -5,4 +5,4 @@
   roles:
     - role: burke.services
       burke_services_ssl_enabled: True
-      burke_services_version: 1.9
+      burke_services_version: 1.11
