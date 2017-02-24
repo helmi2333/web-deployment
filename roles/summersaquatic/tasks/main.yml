@@ -56,5 +56,19 @@
   become: yes
   become_user: "{{ user }}"
 
+- name: Get the soliloquy plugin
+  get_url: url={{ soliloquy_url }}
+           dest={{ soliloquy_tmp }}
+  become: yes
+  become_user: "{{ user }}"
+
+- name: Install soliloquy
+  unarchive:
+    src={{ soliloquy_tmp }}
+    dest={{ directory }}/public/wp-content/plugins
+    copy=no
+  become: yes
+  become_user: "{{ user }}"
+
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d www.summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos

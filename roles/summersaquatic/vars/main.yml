@@ -6,3 +6,7 @@ socket: "{{ php_home_dir }}/run/{{ user }}.sock"
 faq_version: "1.0.3"
 faq_url: "https://downloads.wordpress.org/plugin/quick-and-easy-faqs.{{ faq_version }}.zip"
 faq_tmp: "{{ directory }}/tmp/faq-{{ faq_version }}.zip"
+
+soliloquy_version: "2.5.1"
+soliloquy_url: "https://downloads.wordpress.org/plugin/soliloquy-lite.{{ soliloquy_version }}.zip"
+soliloquy_tmp: "{{ directory }}/tmp/soliloquy-{{ soliloquy_version }}.zip"
