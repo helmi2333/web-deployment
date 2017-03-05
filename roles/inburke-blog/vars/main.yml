@@ -4,7 +4,7 @@ wordpress_debug: False
 inburke_ssl_enabled: False
 syntaxhighlighter_version: 'master'
 
-akismet_version: '3.2'
+akismet_version: '3.3'
 akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
 
 letter_private_key: ssh-keys/inburke.com/letter_rsa
