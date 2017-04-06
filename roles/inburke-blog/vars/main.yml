@@ -4,9 +4,6 @@ wordpress_debug: False
 inburke_ssl_enabled: False
 syntaxhighlighter_version: 'master'
 
-akismet_version: '3.3'
-akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
-
 letter_private_key: ssh-keys/inburke.com/letter_rsa
 letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
 golf_private_key: ssh-keys/inburke.com/golf_rsa
@@ -19,5 +16,3 @@ luxr_private_key: ssh-keys/inburke.com/luxr_rsa
 luxr_remote_private_key: "{{ directory }}/.ssh/luxr_rsa"
 resume_private_key: ssh-keys/inburke.com/resume_rsa
 resume_remote_private_key: "{{ directory }}/.ssh/resume_rsa"
-
-inburke_theme_version: 1.5

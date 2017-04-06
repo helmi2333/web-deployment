@@ -1,0 +1,5 @@
+---
+akismet_version: '3.3'
+akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
+
+inburke_theme_version: '1.6'
