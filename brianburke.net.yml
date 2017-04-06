@@ -5,7 +5,7 @@
   roles:
     - role: brianburke.net
       brianburke_ssl_enabled: True
-      wordpress_version: '4.7.2'
+      wordpress_version: '4.7.3'
 
     - role: mysql_database
       local_database_dump: databases/brianburke.net.dump.sql
