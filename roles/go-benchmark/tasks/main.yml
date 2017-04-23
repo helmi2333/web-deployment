@@ -10,7 +10,8 @@
   become: yes
   become_user: "{{ user }}"
 
-- file: path={{ directory }}/tmp/{{ go_specific }}
+- name: "create path {{ directory }}/tmp"
+  file: path={{ directory }}/tmp/{{ go_specific }}
         state=directory
         mode=0755
         group=go
@@ -18,15 +19,8 @@
   become_user: "{{ user }}"
 
 - unarchive: src=https://storage.googleapis.com/golang/{{ go_specific }}.linux-amd64.tar.gz
-             dest={{ directory }}/tmp/{{ go_version }}
+             dest={{ directory }}/tmp/{{ go_specific }}
              copy=no
-  become: yes
-  become_user: "{{ user }}"
-
-- file: path={{ directory }}/tmp/{{ go_specific }}
-        state=directory
-        mode=0755
-        group=go
   become: yes
   become_user: "{{ user }}"
 
@@ -52,3 +46,15 @@
     GOROOT_BOOTSTRAP: "{{ directory }}/{{ go_version }}"
   become: yes
   become_user: "{{ user }}"
+
+- lineinfile:
+    dest: /home/go/.profile
+    line: 'export GOPATH=/home/go'
+    become: yes
+    become_user: "{{ user }}"
+
+- lineinfile:
+    dest: /home/go/.profile
+    line: 'export PATH=/home/go/bin:$PATH'
+    become: yes
+    become_user: "{{ user }}"

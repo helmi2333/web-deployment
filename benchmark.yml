@@ -1,0 +1,6 @@
+---
+- name: Install benchmark framework
+  hosts: benchmark
+
+  roles:
+    - role: go-benchmark

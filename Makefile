@@ -1,10 +1,10 @@
-ANSIBLE_HOSTS := $$PWD/hosts
+ANSIBLE_HOSTS := $$PWD/benchmark
 
 ping:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible -m ping droplets
 
 bootstrap:
-	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible droplets --sudo -m raw -a "apt-get update && apt-get install -y python2.7 python-mysqldb && ln -s /usr/bin/python2.7 /usr/bin/python || true"
+	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible benchmark --sudo -m raw -a "apt-get update && apt-get install -y python2.7 python-mysqldb && ln -s /usr/bin/python2.7 /usr/bin/python || true"
 
 website:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" \

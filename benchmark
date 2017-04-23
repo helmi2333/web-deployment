@@ -1,0 +1,2 @@
+[benchmark]
+138.197.210.171 ansible_become=yes ansible_become_user=root ansible_host=138.197.210.171
