@@ -14,10 +14,10 @@
   command: "/home/php/bin/php -r 'echo phpversion();' "
   register: result
   ignore_errors: True
-  changed_when: result.rc != 0 or result.stdout != '{{ php_version }}'
+  changed_when: result.rc != 0 or result.stdout != php_version
 
 - include: install.yml
-  when: result.rc != 0 or result.stdout != '{{ php_version }}'
+  when: result.rc != 0 or result.stdout != php_version
 
 - file: path={{ php_home_dir }}/etc/fpm.d
         state=directory

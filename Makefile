@@ -1,4 +1,4 @@
-ANSIBLE_HOSTS := $$PWD/benchmark
+ANSIBLE_HOSTS := $$PWD/hosts
 
 ping:
 	ANSIBLE_HOSTS="$(ANSIBLE_HOSTS)" ansible -m ping droplets

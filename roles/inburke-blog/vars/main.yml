@@ -4,15 +4,16 @@ wordpress_debug: False
 inburke_ssl_enabled: False
 syntaxhighlighter_version: 'master'
 
+# git@bitbucket.org:kevinburke/letter.git
 letter_private_key: ssh-keys/inburke.com/letter_rsa
-letter_remote_private_key: "{{ directory }}/.ssh/letter_rsa"
+letter_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_letter_rsa"
 golf_private_key: ssh-keys/inburke.com/golf_rsa
-golf_remote_private_key: "{{ directory }}/.ssh/golf_rsa"
+golf_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_golf_rsa"
 etc_private_key: ssh-keys/inburke.com/etc_rsa
-etc_remote_private_key: "{{ directory }}/.ssh/etc_rsa"
+etc_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_etc_rsa"
 font_private_key: ssh-keys/inburke.com/font_rsa
-font_remote_private_key: "{{ directory }}/.ssh/font_rsa"
+font_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_font_rsa"
 luxr_private_key: ssh-keys/inburke.com/luxr_rsa
-luxr_remote_private_key: "{{ directory }}/.ssh/luxr_rsa"
+luxr_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_luxr_rsa"
 resume_private_key: ssh-keys/inburke.com/resume_rsa
-resume_remote_private_key: "{{ directory }}/.ssh/resume_rsa"
+resume_remote_private_key: "{{ directory }}/.ssh/{{ inventory_hostname }}_resume_rsa"

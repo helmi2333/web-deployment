@@ -16,7 +16,7 @@
       domain: stage.inburke.com
       inburke_ssl_enabled: True
       php_file_directory: "/home/{{ user }}/public/"
-      wordpress_version: '4.7.3'
+      wordpress_version: '4.7.5'
       redirect_domains:
         - www.stage.inburke.com
       syntaxhighlighter_version: 'develop'

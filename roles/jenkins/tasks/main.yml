@@ -8,7 +8,7 @@
 
 - name: install jenkins
   include: install.yml
-  when: result.rc != 0 or result.stdout_lines[2] != "{{ jenkins_version }}"
+  when: result.rc != 0 or result.stdout_lines[2] != jenkins_version
 
 - name: create ssh directory
   file: path={{ jenkins_ssh_dir }} state=directory mode=0755
