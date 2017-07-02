@@ -70,5 +70,15 @@
   become: yes
   become_user: "{{ user }}"
 
+- copy: src=tarsnap-backup
+        dest=/root/bin/summers-tarsnap-backup
+        mode=0700
+
+- name: install cron to backup directory
+  cron: name="back up summersaquaticpt.com directory"
+        hour=15
+        minute=52
+        job="/root/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c '/root/bin/summers-tarsnap-backup'"
+
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos
 # - cron: /opt/certbot/certbot-auto certonly --webroot -w /home/summers/public -d www.summersaquaticpt.com --renew-by-default --email kev@inburke.com --text --agree-tos

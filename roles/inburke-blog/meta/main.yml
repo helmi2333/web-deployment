@@ -3,3 +3,4 @@ dependencies:
   - { role: letsencrypt }
   - { role: nginx }
   - { role: php }
+  - { role: mysql }

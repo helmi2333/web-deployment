@@ -73,3 +73,14 @@
 
 - name: Create Tarsnap cache directory
   file: state=directory path=/root/cache/tarsnap
+
+- name: Create keys directory
+  file: state=directory path=/root/keys
+
+- name: copy conf
+  copy: src=tarsnaprc
+        dest=/usr/local/etc/tarsnap.conf
+        mode=0644
+
+# TODO: you need to run tarsnap-keygen and enter your tarsnap password to get
+# this to work.

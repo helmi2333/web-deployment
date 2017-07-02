@@ -1,2 +1,28 @@
 ---
 - apt: name=mysql-server state=present
+
+- git: repo=https://github.com/Shyp/crontroller.git
+       dest=/root/crontroller
+       accept_hostkey=yes
+
+- file: path=/root/bin
+        state=directory
+        mode=0755
+
+- file: path=/root/tmp
+        state=directory
+        mode=0755
+
+- name: copy crontroller script to the bin directory
+  command: cp /root/crontroller/crontroller /root/bin/crontroller
+
+- name: copy backup script
+  copy: src=backup.sh
+        dest=/root/bin/mysql-backup
+        mode=0700
+
+- name: install cron to backup mysql database
+  cron: name="back up mysql database"
+        hour=22
+        minute=11
+        job="/root/bin/crontroller -e 'kev+crontroller@inburke.com' -f cron@inburke.com -a bash -c '/root/bin/mysql-backup'"
