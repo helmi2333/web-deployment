@@ -1,3 +1,5 @@
 ---
 dependencies:
+  - { role: tarsnap }
   - { role: mandrill }
+  - { role: letsencrypt }
