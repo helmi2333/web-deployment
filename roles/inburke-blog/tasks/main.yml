@@ -117,6 +117,7 @@
 
 - git: repo=https://github.com/kevinburke/blog.git
        dest={{ directory }}/public/rawblog
+       update=yes
   become: yes
   become_user: "{{ user }}"
 
