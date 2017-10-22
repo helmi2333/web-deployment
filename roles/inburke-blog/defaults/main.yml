@@ -2,4 +2,4 @@
 akismet_version: '4.0'
 akismet_url: "https://downloads.wordpress.org/plugin/akismet.{{ akismet_version }}.zip"
 
-inburke_theme_version: '1.6'
+inburke_theme_version: '1.10'

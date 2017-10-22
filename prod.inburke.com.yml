@@ -8,6 +8,7 @@
       user: inburke
       directory: "/home/{{ user }}"
       domain: kev.inburke.com
+      inburke_theme_version: '1.10'
       inburke_ssl_enabled: True
       # this is a shitty hack but it's not worth the time to figure out how to
       # do this properly
